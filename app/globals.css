@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #000000;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  overflow-x: hidden;
+}
