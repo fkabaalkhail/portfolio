@@ -107,15 +107,15 @@ export default function CalendarPicker({
         <button
           onClick={prevMonth}
           disabled={isPrevDisabled()}
-          className="p-2 text-white/60 hover:text-white disabled:text-white/20 disabled:cursor-not-allowed transition-colors rounded-md hover:bg-white/5"
+          className="p-2 text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white disabled:text-black/20 dark:disabled:text-white/20 disabled:cursor-not-allowed transition-colors rounded-md hover:bg-black/5 dark:hover:bg-white/5"
           aria-label="Previous month"
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
-        <span className="text-sm font-medium text-white">{monthName}</span>
+        <span className="text-sm font-medium text-black dark:text-white">{monthName}</span>
         <button
           onClick={nextMonth}
-          className="p-2 text-white/60 hover:text-white transition-colors rounded-md hover:bg-white/5"
+          className="p-2 text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white transition-colors rounded-md hover:bg-black/5 dark:hover:bg-white/5"
           aria-label="Next month"
         >
           <ChevronRight className="w-4 h-4" />
@@ -127,7 +127,7 @@ export default function CalendarPicker({
         {weekdays.map((day) => (
           <div
             key={day}
-            className="text-center text-xs text-white/40 font-medium py-1"
+            className="text-center text-xs text-black/40 dark:text-white/40 font-medium py-1"
           >
             {day}
           </div>
@@ -140,7 +140,7 @@ export default function CalendarPicker({
         {prevMonthDays.map((day) => (
           <div
             key={`prev-${day}`}
-            className="aspect-square flex items-center justify-center rounded-md text-sm text-white/10"
+            className="aspect-square flex items-center justify-center rounded-md text-sm text-black/10 dark:text-white/10"
           >
             {day}
           </div>
@@ -167,10 +167,10 @@ export default function CalendarPicker({
               className={cn(
                 "aspect-square flex items-center justify-center rounded-md text-sm transition-colors",
                 selected
-                  ? "bg-white text-black font-medium"
+                  ? "bg-black text-white dark:bg-white dark:text-black font-medium"
                   : disabled
-                    ? "text-white/20 cursor-not-allowed"
-                    : "text-white/70 hover:bg-white/10 hover:text-white cursor-pointer"
+                    ? "text-black/20 dark:text-white/20 cursor-not-allowed"
+                    : "text-black/70 dark:text-white/70 hover:bg-black/10 dark:hover:bg-white/10 hover:text-black dark:hover:text-white cursor-pointer"
               )}
               aria-label={`${monthName} ${day}`}
             >
@@ -183,7 +183,7 @@ export default function CalendarPicker({
         {nextMonthDays.map((day) => (
           <div
             key={`next-${day}`}
-            className="aspect-square flex items-center justify-center rounded-md text-sm text-white/10"
+            className="aspect-square flex items-center justify-center rounded-md text-sm text-black/10 dark:text-white/10"
           >
             {day}
           </div>

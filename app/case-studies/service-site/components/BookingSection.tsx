@@ -100,33 +100,33 @@ export default function BookingSection() {
         transition={{ duration: 0.6 }}
         className="mb-12"
       >
-        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+        <h2 className="text-2xl sm:text-3xl font-bold text-black dark:text-white mb-4">
           Book a Session
         </h2>
-        <p className="text-white/40 leading-relaxed max-w-2xl">
+        <p className="text-black/40 dark:text-white/40 leading-relaxed max-w-2xl">
           Schedule time with me in a few simple steps.
         </p>
       </motion.div>
 
-      <div className="rounded-xl border border-white/[0.08] bg-[#0a0a0a] p-6 sm:p-8">
+      <div className="rounded-xl border border-black/[0.08] dark:border-white/[0.08] bg-gray-50 dark:bg-[#0a0a0a] p-6 sm:p-8">
         {/* Step header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-2">
             {state.step !== "select-service" && state.step !== "success" && (
               <button
                 onClick={() => dispatch({ type: "BACK" })}
-                className="p-1.5 text-white/50 hover:text-white transition-colors rounded-md hover:bg-white/5"
+                className="p-1.5 text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white transition-colors rounded-md hover:bg-black/5 dark:hover:bg-white/5"
                 aria-label="Go back"
               >
                 <ArrowLeft className="w-4 h-4" />
               </button>
             )}
-            <h3 className="text-lg font-semibold text-white">
+            <h3 className="text-lg font-semibold text-black dark:text-white">
               {stepTitles[state.step]}
             </h3>
           </div>
           {state.step !== "success" && state.step !== "select-service" && (
-            <span className="text-xs text-white/30">
+            <span className="text-xs text-black/30 dark:text-white/30">
               Step {stepNumber()} of 4
             </span>
           )}
@@ -152,13 +152,13 @@ export default function BookingSection() {
                     onClick={() =>
                       dispatch({ type: "SELECT_SERVICE", payload: option.id })
                     }
-                    className="text-left p-4 rounded-lg border border-white/[0.08] hover:border-white/[0.15] transition-colors group"
+                    className="text-left p-4 rounded-lg border border-black/[0.08] dark:border-white/[0.08] hover:border-black/[0.15] dark:hover:border-white/[0.15] transition-colors group"
                   >
-                    <Icon className="w-4 h-4 text-white/50 group-hover:text-white/80 mb-2 transition-colors" />
-                    <h4 className="text-sm font-medium text-white mb-1">
+                    <Icon className="w-4 h-4 text-black/50 dark:text-white/50 group-hover:text-black/80 dark:group-hover:text-white/80 mb-2 transition-colors" />
+                    <h4 className="text-sm font-medium text-black dark:text-white mb-1">
                       {option.title}
                     </h4>
-                    <p className="text-xs text-white/40">{option.pricing}</p>
+                    <p className="text-xs text-black/40 dark:text-white/40">{option.pricing}</p>
                   </button>
                 );
               })}
@@ -176,8 +176,8 @@ export default function BookingSection() {
             >
               <div className="flex flex-col items-center">
                 {selectedOption && (
-                  <p className="text-sm text-white/50 mb-6">
-                    Scheduling: <span className="text-white/80">{selectedOption.title}</span>
+                  <p className="text-sm text-black/50 dark:text-white/50 mb-6">
+                    Scheduling: <span className="text-black/80 dark:text-white/80">{selectedOption.title}</span>
                   </p>
                 )}
                 <CalendarPicker
@@ -201,9 +201,9 @@ export default function BookingSection() {
             >
               <div className="flex flex-col items-center">
                 {state.selectedDate && (
-                  <p className="text-sm text-white/50 mb-6">
+                  <p className="text-sm text-black/50 dark:text-white/50 mb-6">
                     Date:{" "}
-                    <span className="text-white/80">
+                    <span className="text-black/80 dark:text-white/80">
                       {state.selectedDate.toLocaleDateString("en-US", {
                         weekday: "long",
                         month: "long",
@@ -233,16 +233,16 @@ export default function BookingSection() {
               className="max-w-sm mx-auto text-center"
             >
               <div className="space-y-4 mb-8">
-                <div className="rounded-lg border border-white/[0.08] p-4 text-left space-y-3">
+                <div className="rounded-lg border border-black/[0.08] dark:border-white/[0.08] p-4 text-left space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-sm text-white/40">Service</span>
-                    <span className="text-sm text-white">
+                    <span className="text-sm text-black/40 dark:text-white/40">Service</span>
+                    <span className="text-sm text-black dark:text-white">
                       {selectedOption?.title}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm text-white/40">Date</span>
-                    <span className="text-sm text-white">
+                    <span className="text-sm text-black/40 dark:text-white/40">Date</span>
+                    <span className="text-sm text-black dark:text-white">
                       {state.selectedDate?.toLocaleDateString("en-US", {
                         month: "short",
                         day: "numeric",
@@ -251,14 +251,14 @@ export default function BookingSection() {
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm text-white/40">Time</span>
-                    <span className="text-sm text-white">
+                    <span className="text-sm text-black/40 dark:text-white/40">Time</span>
+                    <span className="text-sm text-black dark:text-white">
                       {state.selectedTime}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm text-white/40">Price</span>
-                    <span className="text-sm text-white">
+                    <span className="text-sm text-black/40 dark:text-white/40">Price</span>
+                    <span className="text-sm text-black dark:text-white">
                       {selectedOption?.pricing}
                     </span>
                   </div>
@@ -266,7 +266,7 @@ export default function BookingSection() {
               </div>
               <button
                 onClick={() => dispatch({ type: "CONFIRM" })}
-                className="bg-white text-black hover:bg-white/90 rounded-md px-8 py-2.5 font-medium transition-colors w-full"
+                className="bg-black text-white dark:bg-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90 rounded-md px-8 py-2.5 font-medium transition-colors w-full"
               >
                 Confirm Booking
               </button>
@@ -283,18 +283,18 @@ export default function BookingSection() {
               transition={{ duration: 0.3 }}
               className="text-center py-8"
             >
-              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
-                <Check className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 rounded-full bg-black/10 dark:bg-white/10 flex items-center justify-center mx-auto mb-4">
+                <Check className="w-6 h-6 text-black dark:text-white" />
               </div>
-              <h4 className="text-lg font-semibold text-white mb-2">
+              <h4 className="text-lg font-semibold text-black dark:text-white mb-2">
                 You&apos;re all set!
               </h4>
-              <p className="text-sm text-white/40 mb-6">
+              <p className="text-sm text-black/40 dark:text-white/40 mb-6">
                 A confirmation email will be sent to you shortly.
               </p>
               <button
                 onClick={() => dispatch({ type: "RESET" })}
-                className="border border-white/[0.15] text-white/60 hover:border-white/30 hover:text-white rounded-md px-5 py-2.5 text-sm transition-colors"
+                className="border border-black/[0.15] dark:border-white/[0.15] text-black/60 dark:text-white/60 hover:border-black/30 dark:hover:border-white/30 hover:text-black dark:hover:text-white rounded-md px-5 py-2.5 text-sm transition-colors"
               >
                 Book Another Session
               </button>

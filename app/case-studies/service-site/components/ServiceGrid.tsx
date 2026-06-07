@@ -33,10 +33,10 @@ export default function ServiceGrid() {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+        <h2 className="text-2xl sm:text-3xl font-bold text-black dark:text-white mb-4">
           Services
         </h2>
-        <p className="text-white/40 leading-relaxed mb-12 max-w-2xl">
+        <p className="text-black/40 dark:text-white/40 leading-relaxed mb-12 max-w-2xl">
           Specialized expertise across the full stack — from cloud
           infrastructure to pixel-perfect interfaces.
         </p>
@@ -53,17 +53,17 @@ export default function ServiceGrid() {
           const Icon = iconMap[service.icon];
           return (
             <motion.div key={service.id} variants={itemVariants}>
-              <div className="rounded-xl border border-white/[0.08] bg-[#0a0a0a] px-5 py-4 h-full transition-colors hover:border-white/[0.15]">
+              <div className="rounded-xl border border-black/[0.08] dark:border-white/[0.08] bg-gray-50 dark:bg-[#0a0a0a] px-5 py-4 h-full transition-colors hover:border-black/[0.15] dark:hover:border-white/[0.15]">
                 <div className="flex items-start justify-between mb-3">
-                  <Icon className="w-5 h-5 text-white/60" />
-                  <span className="text-xs text-white/40 font-medium">
+                  <Icon className="w-5 h-5 text-black/60 dark:text-white/60" />
+                  <span className="text-xs text-black/40 dark:text-white/40 font-medium">
                     {service.pricing}
                   </span>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">
+                <h3 className="text-lg font-semibold text-black dark:text-white mb-2">
                   {service.title}
                 </h3>
-                <p className="text-sm text-white/40 leading-relaxed">
+                <p className="text-sm text-black/40 dark:text-white/40 leading-relaxed">
                   {service.description}
                 </p>
               </div>

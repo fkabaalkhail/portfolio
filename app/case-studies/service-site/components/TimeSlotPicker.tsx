@@ -27,7 +27,7 @@ export default function TimeSlotPicker({
 }: TimeSlotPickerProps) {
   return (
     <div className="w-full max-w-sm mx-auto">
-      <p className="text-sm text-white/50 mb-4 text-center">
+      <p className="text-sm text-black/50 dark:text-white/50 mb-4 text-center">
         Select an available time slot
       </p>
       <div className="grid grid-cols-2 gap-2">
@@ -43,10 +43,10 @@ export default function TimeSlotPicker({
               className={cn(
                 "px-4 py-3 rounded-md text-sm font-medium transition-colors",
                 isSelected
-                  ? "bg-white text-black"
+                  ? "bg-black text-white dark:bg-white dark:text-black"
                   : isUnavailable
-                    ? "border border-white/[0.06] text-white/20 cursor-not-allowed line-through"
-                    : "border border-white/[0.08] text-white/60 hover:border-white/[0.15] hover:text-white"
+                    ? "border border-black/[0.06] dark:border-white/[0.06] text-black/20 dark:text-white/20 cursor-not-allowed line-through"
+                    : "border border-black/[0.08] dark:border-white/[0.08] text-black/60 dark:text-white/60 hover:border-black/[0.15] dark:hover:border-white/[0.15] hover:text-black dark:hover:text-white"
               )}
             >
               {time}

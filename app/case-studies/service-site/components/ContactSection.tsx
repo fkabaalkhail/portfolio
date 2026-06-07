@@ -33,10 +33,10 @@ export default function ContactSection() {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+        <h2 className="text-2xl sm:text-3xl font-bold text-black dark:text-white mb-4">
           Get in Touch
         </h2>
-        <p className="text-white/40 leading-relaxed mb-12 max-w-2xl">
+        <p className="text-black/40 dark:text-white/40 leading-relaxed mb-12 max-w-2xl">
           Have a project in mind? Reach out and let&apos;s talk about how I can help.
         </p>
       </motion.div>
@@ -51,19 +51,19 @@ export default function ContactSection() {
         {contactInfo.map((item) => (
           <div
             key={item.label}
-            className="rounded-xl border border-white/[0.08] bg-[#0a0a0a] px-5 py-4 transition-colors hover:border-white/[0.15]"
+            className="rounded-xl border border-black/[0.08] dark:border-white/[0.08] bg-gray-50 dark:bg-[#0a0a0a] px-5 py-4 transition-colors hover:border-black/[0.15] dark:hover:border-white/[0.15]"
           >
-            <item.icon className="w-5 h-5 text-white/50 mb-3" />
-            <p className="text-xs text-white/40 mb-1">{item.label}</p>
+            <item.icon className="w-5 h-5 text-black/50 dark:text-white/50 mb-3" />
+            <p className="text-xs text-black/40 dark:text-white/40 mb-1">{item.label}</p>
             {item.href ? (
               <a
                 href={item.href}
-                className="text-sm text-white/80 hover:text-white transition-colors"
+                className="text-sm text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white transition-colors"
               >
                 {item.value}
               </a>
             ) : (
-              <p className="text-sm text-white/80">{item.value}</p>
+              <p className="text-sm text-black/80 dark:text-white/80">{item.value}</p>
             )}
           </div>
         ))}

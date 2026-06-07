@@ -18,7 +18,7 @@ function FloatingPaths({ position }: { position: number }) {
   return (
     <div className="absolute inset-0 pointer-events-none">
       <svg
-        className="w-full h-full text-white"
+        className="w-full h-full text-black dark:text-white"
         viewBox="0 0 696 316"
         fill="none"
       >
@@ -53,7 +53,7 @@ export default function ServiceHero() {
   const words = title.split(" ");
 
   return (
-    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-black">
+    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-white dark:bg-black">
       <div className="absolute inset-0">
         <FloatingPaths position={1} />
         <FloatingPaths position={-1} />
@@ -80,7 +80,7 @@ export default function ServiceHero() {
                       stiffness: 150,
                       damping: 25,
                     }}
-                    className="inline-block text-white"
+                    className="inline-block text-black dark:text-white"
                   >
                     {letter}
                   </motion.span>
@@ -93,7 +93,7 @@ export default function ServiceHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.6 }}
-            className="text-xl sm:text-2xl text-white/60 font-medium mb-4"
+            className="text-xl sm:text-2xl text-black/60 dark:text-white/60 font-medium mb-4"
           >
             Freelance Tech Consulting & Development
           </motion.p>
@@ -102,7 +102,7 @@ export default function ServiceHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.0, duration: 0.6 }}
-            className="text-base sm:text-lg text-white/40 leading-relaxed max-w-2xl mx-auto mb-10"
+            className="text-base sm:text-lg text-black/40 dark:text-white/40 leading-relaxed max-w-2xl mx-auto mb-10"
           >
             Cloud infrastructure, web applications, iOS development, and AI
             automation. Built with precision, shipped with confidence.
@@ -113,7 +113,7 @@ export default function ServiceHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.6 }}
-            className="inline-block bg-white text-black hover:bg-white/90 rounded-full px-8 py-3.5 font-medium transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+            className="inline-block bg-black text-white dark:bg-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90 rounded-full px-8 py-3.5 font-medium transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
           >
             Book a Consultation →
           </motion.a>
