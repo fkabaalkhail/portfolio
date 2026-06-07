@@ -1,10 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Sun, Moon } from "lucide-react";
 import { motion } from "framer-motion";
-import { ThemeProvider } from "next-themes";
-import { ToggleTheme } from "./ToggleTheme";
 import ServiceHero from "./ServiceHero";
 import ServiceGrid from "./ServiceGrid";
 import AboutSection from "./AboutSection";
@@ -12,9 +11,11 @@ import BookingSection from "./BookingSection";
 import ContactSection from "./ContactSection";
 
 export default function ServiceSiteClient() {
+  const [isDark, setIsDark] = useState(true);
+
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-      <div className="min-h-screen bg-white dark:bg-black text-black/80 dark:text-white/50">
+    <div className={isDark ? "dark" : ""}>
+      <div className="min-h-screen bg-white dark:bg-black text-black/80 dark:text-white/50 transition-colors duration-300">
         {/* Top bar with back link and theme toggle */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -29,7 +30,16 @@ export default function ServiceSiteClient() {
             <ArrowLeft className="h-4 w-4" />
             Back to Portfolio
           </Link>
-          <ToggleTheme />
+
+          {/* Theme toggle */}
+          <button
+            onClick={() => setIsDark(!isDark)}
+            className="inline-flex items-center gap-2 rounded-lg border border-black/[0.08] dark:border-white/[0.08] px-3 py-2 text-sm text-black/50 dark:text-white/50 hover:border-black/[0.15] dark:hover:border-white/[0.15] hover:text-black dark:hover:text-white transition-colors"
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            <span>{isDark ? "Light" : "Dark"}</span>
+          </button>
         </motion.div>
 
         <ServiceHero />
@@ -43,6 +53,6 @@ export default function ServiceSiteClient() {
           Designed by Fahad Aba-Alkhail
         </div>
       </div>
-    </ThemeProvider>
+    </div>
   );
 }
