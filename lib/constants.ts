@@ -116,7 +116,7 @@ export const siteConfig = {
     {
       id: "service-site",
       title: "Service Site",
-      imageSrc: "/images/case-study-1.jpg",
+      imageSrc: "/images/service-site-preview.png",
       imageAlt: "Service website design preview",
       href: "/case-studies/service-site",
     },
