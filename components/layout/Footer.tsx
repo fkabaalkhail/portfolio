@@ -1,3 +1,6 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { Mail } from "lucide-react";
 import { siteConfig } from "@/lib/constants";
 
@@ -10,6 +13,12 @@ function GithubIcon({ className }: { className?: string }) {
 }
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/case-studies/service-site")) {
+    return null;
+  }
+
   return (
     <footer className="relative z-10 border-t border-white/[0.06] py-8">
       <div className="mx-auto max-w-6xl px-4 flex flex-col items-center gap-4 sm:flex-row sm:justify-between">

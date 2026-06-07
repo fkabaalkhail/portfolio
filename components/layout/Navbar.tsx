@@ -1,14 +1,20 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { navLinks } from "@/lib/constants";
 
 export default function Navbar() {
   const [active, setActive] = useState("about");
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isServiceSite = pathname.startsWith("/case-studies/service-site");
 
   useEffect(() => {
+    if (isServiceSite) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -26,7 +32,9 @@ export default function Navbar() {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [isServiceSite]);
+
+  if (isServiceSite) return null;
 
   function handleClick(href: string) {
     const el = document.querySelector(href);
