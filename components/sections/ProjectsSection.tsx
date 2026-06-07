@@ -26,46 +26,47 @@ export default function ProjectsSection() {
         {siteConfig.projects.map((project) => (
           <GridCard key={project.id} className="p-6">
             <div className="relative z-10 flex flex-col h-full">
-            <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-            <p className="text-white/45 text-sm leading-relaxed mb-4 flex-1">
-              {project.description}
-            </p>
+              <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+              <p className="text-white/45 text-sm leading-relaxed mb-4 flex-1">
+                {project.description}
+              </p>
 
-            {project.imageSrc && (
-              <button
-                onClick={() => setExpandedImg(project.imageSrc || null)}
-                className="relative w-full rounded-lg overflow-hidden border border-white/[0.08] hover:border-white/[0.15] transition-colors cursor-zoom-in mb-4"
+              {project.imageSrc && (
+                <button
+                  onClick={() => setExpandedImg(project.imageSrc || null)}
+                  className="relative w-full rounded-lg overflow-hidden border border-white/[0.08] hover:border-white/[0.15] transition-colors cursor-zoom-in mb-4"
+                >
+                  <Image
+                    src={project.imageSrc}
+                    alt={project.imageAlt || `${project.title} architecture`}
+                    width={600}
+                    height={340}
+                    className="w-full h-auto"
+                  />
+                </button>
+              )}
+
+              {/* Tech stack */}
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {project.tech.map((t) => (
+                  <span key={t} className="inline-block rounded bg-white/[0.04] border border-white/[0.08] px-2 py-0.5 text-xs text-white/50">
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors w-fit"
               >
-                <Image
-                  src={project.imageSrc}
-                  alt={project.imageAlt || `${project.title} architecture`}
-                  width={600}
-                  height={340}
-                  className="w-full h-auto"
-                />
-              </button>
-            )}
-
-            {/* Tech stack */}
-            <div className="flex flex-wrap gap-1.5 mb-4">
-              {project.tech.map((t) => (
-                <span key={t} className="inline-block rounded bg-white/[0.04] border border-white/[0.08] px-2 py-0.5 text-xs text-white/50">
-                  {t}
-                </span>
-              ))}
+                <GithubIcon className="h-4 w-4" />
+                <span>View Source</span>
+                <ExternalLink className="h-3 w-3" />
+              </a>
             </div>
-
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors w-fit"
-            >
-              <GithubIcon className="h-4 w-4" />
-              <span>View Source</span>
-              <ExternalLink className="h-3 w-3" />
-            </a>
-          </div>
+          </GridCard>
         ))}
       </div>
 
