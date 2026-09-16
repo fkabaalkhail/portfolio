@@ -30,8 +30,9 @@ matched to each app's own UI.
 
 ## 3. Typography
 - **Display**: Newsreader, weight 400, negative tracking. Never bold. Sizes are 64 / 48 / 36 / 28.
-- **Body/UI**: Inter. Use 400 for text and 500 for labels, buttons and nav.
-- **Code**: JetBrains Mono at 13–14px, for code windows and terminal output.
+- **Body/UI**: Schibsted Grotesk. Use 400 for text and 500 for labels, buttons and nav.
+- **Figures**: the `.figure` class — Schibsted Grotesk 600, tight tracking, tabular lining numerals. Never serif or mono for stats.
+- **Code**: Fira Code, only inside code windows and terminal output. No mono labels or "01 / 04" numbering elsewhere.
 - **Eyebrow**: 12px, weight 500, uppercase, 1.5px tracking, `muted`.
 - Emphasis inside a headline uses a `muted` second clause, not a new color.
 

@@ -122,7 +122,7 @@ export default function LapelShowcase() {
               <span className="text-xl font-semibold tracking-[0.18em]">LAPEL</span>
             </span>
             <span className="rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[1.5px]" style={{ borderColor: `${signal}55`, color: signal }}>
-              02 · Coming soon to the App Store
+              Coming soon to the App Store
             </span>
           </div>
           <h3 className="mt-8 max-w-3xl font-display text-[clamp(2.25rem,4.6vw,3.5rem)] font-normal leading-[1.08] tracking-[-0.02em]">

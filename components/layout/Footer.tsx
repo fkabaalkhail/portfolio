@@ -26,7 +26,7 @@ export default function Footer() {
             fahad<span className="text-accent-soft">.</span>
           </p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed">
-            {siteConfig.role} in {siteConfig.location}. SwiftUI to Kubernetes.
+            {siteConfig.role} in {siteConfig.location}. Backend, cloud and DevOps.
           </p>
         </div>
 

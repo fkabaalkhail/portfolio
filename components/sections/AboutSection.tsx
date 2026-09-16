@@ -2,11 +2,17 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Aperture, Award, ChessKnight, TreePine, Trophy } from "lucide-react";
+import { Award } from "lucide-react";
+import { ChessArt, FootballArt, HikingArt, PhotographyArt } from "@/components/ui/InterestArt";
 import { siteConfig } from "@/lib/constants";
 import { CountUp, EASE_OUT, Eyebrow, Reveal, SectionHeading } from "@/components/motion/primitives";
 
-const interestIcons = [TreePine, Aperture, ChessKnight, Trophy];
+const interestCards = [
+  { Art: HikingArt, title: "Hiking", body: "Exploring nature trails" },
+  { Art: PhotographyArt, title: "Photography", body: "Visual storytelling" },
+  { Art: ChessArt, title: "Chess", body: "Playing competitively" },
+  { Art: FootballArt, title: "Football", body: "On the pitch every week" },
+];
 
 const impact = [
   { value: 35, suffix: "%", label: "lower data access latency", where: "Ericsson" },
@@ -16,7 +22,7 @@ const impact = [
 ];
 
 export default function AboutSection() {
-  const { education, interests } = siteConfig;
+  const { education } = siteConfig;
 
   return (
     <section id="about" className="scroll-mt-16 border-t border-hairline bg-surface-soft px-5 py-24 md:px-8">
@@ -24,7 +30,7 @@ export default function AboutSection() {
         {/* bio */}
         <div>
           <Eyebrow>About me</Eyebrow>
-          <SectionHeading className="mt-4" title="Infrastructure first," muted="then all the way up the stack." />
+          <SectionHeading className="mt-4" title="Infrastructure first," muted="then across the whole stack." />
           <Reveal delay={0.1} className="mt-8 space-y-5 text-lg leading-relaxed text-body">
             <p>
               I&apos;m Fahad, a software engineer based in Ottawa. I started on the infrastructure side — standing up
@@ -32,24 +38,36 @@ export default function AboutSection() {
               shipping the products themselves.
             </p>
             <p>
-              Today I work on Kubernetes and data platforms at Ericsson. Alongside that I design and build iOS products
-              like Mrasem, Lapel and Mawaqeet, owning everything from the SwiftUI screens to the APIs, databases and
-              deployments behind them.
+              Today I work on Kubernetes and data platforms at Ericsson — deployments, migrations and the tooling that
+              keeps them reliable. I&apos;m comfortable anywhere in a system: writing the service, designing the data
+              model, automating the infrastructure and watching it in production.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.12}>
+            <p className="mt-5 text-lg leading-relaxed text-body">
+              For fun I build iOS apps — Mrasem, Lapel and Mawaqeet — each with its own backend, so every side project is
+              a full-stack one.
             </p>
           </Reveal>
 
           <Reveal delay={0.15} className="mt-10">
             <p className="text-xs font-medium uppercase tracking-[1.5px] text-muted-soft">Away from the keyboard</p>
             <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-              {interests.map((interest, i) => {
-                const Icon = interestIcons[i % interestIcons.length];
-                return (
-                  <li key={interest} className="flex items-center gap-3 rounded-lg border border-hairline bg-canvas px-4 py-3">
-                    <Icon className="h-4 w-4 shrink-0 text-accent" />
-                    <span className="text-sm text-body">{interest}</span>
-                  </li>
-                );
-              })}
+              {interestCards.map(({ Art, title, body }) => (
+                <li
+                  key={title}
+                  className="group flex items-center gap-4 rounded-lg border border-hairline bg-canvas p-4 transition-colors hover:border-muted-soft"
+                >
+                  <span className="h-14 w-14 shrink-0 text-accent">
+                    <Art />
+                  </span>
+                  <span>
+                    <span className="block font-medium text-ink">{title}</span>
+                    <span className="block text-sm leading-snug text-muted">{body}</span>
+                  </span>
+                </li>
+              ))}
             </ul>
           </Reveal>
         </div>
@@ -80,11 +98,11 @@ export default function AboutSection() {
             </div>
             <div className="mt-8 grid grid-cols-2 gap-6 border-t border-hairline pt-6">
               <div>
-                <CountUp to={3.9} decimals={1} className="font-display text-5xl tracking-[-0.02em] text-ink" />
+                <CountUp to={3.9} decimals={1} className="figure text-5xl text-ink" />
                 <p className="mt-1 text-sm text-muted">GPA out of 4.0</p>
               </div>
               <div>
-                <p className="font-display text-5xl tracking-[-0.02em] text-ink">{education.graduationDate}</p>
+                <p className="figure text-5xl text-ink">{education.graduationDate}</p>
                 <p className="mt-1 text-sm text-muted">Graduated</p>
               </div>
             </div>
@@ -105,10 +123,10 @@ export default function AboutSection() {
                     to={item.value}
                     decimals={item.decimals ?? 0}
                     suffix={item.suffix}
-                    className="font-display text-4xl tracking-[-0.02em] md:text-5xl"
+                    className="figure text-4xl md:text-5xl"
                   />
                   <p className="mt-1 text-sm text-on-dark">{item.label}</p>
-                  <p className="font-mono text-xs text-on-dark-soft">{item.where}</p>
+                  <p className="text-xs text-on-dark-soft">{item.where}</p>
                 </div>
               ))}
             </div>

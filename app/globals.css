@@ -75,6 +75,15 @@ body {
   color: white;
 }
 
+/* stats and figures: the body grotesk, heavier, with tabular numerals */
+.figure {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  font-variant-numeric: lining-nums proportional-nums;
+  line-height: 1;
+}
+
 .marquee-mask {
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }

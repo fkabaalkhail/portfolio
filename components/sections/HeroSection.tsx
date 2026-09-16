@@ -5,7 +5,7 @@ import { motion, useMotionValue, useScroll, useSpring, useTransform, type Motion
 import { ArrowRight } from "lucide-react";
 import { siteConfig } from "@/lib/constants";
 import IPhone from "@/components/ui/IPhone";
-import { EASE_OUT, SplitWords, TechLogo } from "@/components/motion/primitives";
+import { EASE_OUT, RollingLabel, SplitWords, TechLogo, rollingParent } from "@/components/motion/primitives";
 
 const dailyStack = [
   { name: "Swift", icon: "/stack/swift.svg" },
@@ -29,6 +29,16 @@ const codeLines: { indent: number; tokens: [string, string][] }[] = [
   { indent: 1, tokens: [["text-[#c792ea]", "if"], ["text-on-dark", " (error) "], ["text-[#c792ea]", "return"], ["text-on-dark", " res.sendStatus("], ["text-amber", "400"], ["text-on-dark", ");"]] },
   { indent: 1, tokens: [["text-on-dark", "res.status("], ["text-amber", "201"], ["text-on-dark", ").json(data);"]] },
   { indent: 0, tokens: [["text-on-dark", "});"]] },
+];
+
+// illustrative infra output, not a real account or cluster
+const tfLines = [
+  { text: "$ terraform apply", cls: "text-on-dark" },
+  { text: "module.vpc: Refreshing state...", cls: "" },
+  { text: "aws_eks_node_group.api: Modifying...", cls: "" },
+  { text: "aws_eks_node_group.api: Modified", cls: "" },
+  { text: "helm_release.monitoring: Created", cls: "" },
+  { text: "Apply complete! 3 added, 1 changed.", cls: "text-success" },
 ];
 
 const podRows = [
@@ -114,12 +124,12 @@ export default function HeroSection() {
               className="h-px w-10 origin-left bg-ink"
             />
             <span className="font-medium text-ink">{siteConfig.role}</span>
-            <span className="font-mono text-xs text-muted-soft">45.42° N, 75.70° W</span>
+            <span className="text-sm text-muted-soft">Backend · Cloud · DevOps</span>
           </motion.div>
 
           <h1 className="mt-6 font-display text-[clamp(2.5rem,5.6vw,4.25rem)] font-normal leading-[1.04] tracking-[-0.025em] text-ink">
-            <SplitWords text="I build products end to end," delay={0.1} />{" "}
-            <SplitWords text="from the screen to the cluster." delay={0.3} wordClassName="text-muted-soft" />
+            <SplitWords text="I build and run software" delay={0.1} />{" "}
+            <SplitWords text="from the API to the cloud." delay={0.3} wordClassName="text-muted-soft" />
           </h1>
 
           <motion.p
@@ -137,13 +147,14 @@ export default function HeroSection() {
             transition={{ duration: 0.7, ease: EASE_OUT, delay: 0.65 }}
             className="mt-8 flex flex-wrap gap-3"
           >
-            <a
-              href="#about"
+            <motion.a
+              href="#experience"
+              {...rollingParent}
               className="group inline-flex h-11 items-center gap-2 rounded-md bg-accent px-5 text-sm font-medium text-white transition-colors hover:bg-accent-active"
             >
-              About me
+              <RollingLabel>See my experience</RollingLabel>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </a>
+            </motion.a>
             <a
               href={siteConfig.github}
               target="_blank"
@@ -178,7 +189,7 @@ export default function HeroSection() {
         {/* layered full-stack scene */}
         <motion.div style={{ y: sceneY }} className="relative mx-auto aspect-[1/1.08] w-full max-w-[560px]">
           {/* API code window */}
-          <Layer className="absolute left-0 top-[5%] z-10 w-[68%]" depth={-10} sx={sx} sy={sy} floatY={-6} duration={7} delay={0.3}>
+          <Layer className="absolute left-0 top-[5%] z-10 w-[72%]" depth={-10} sx={sx} sy={sy} floatY={-6} duration={7} delay={0.3}>
             <div className="overflow-hidden rounded-lg bg-dark shadow-[0_30px_60px_-30px_rgba(20,20,19,0.55)]">
               <div className="flex items-center gap-2 border-b border-white/5 px-4 py-2.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
@@ -217,22 +228,38 @@ export default function HeroSection() {
             </div>
           </Layer>
 
-          {/* Mawaqeet phone (back) */}
-          <Layer className="absolute right-0 top-0 z-0 w-[31%]" depth={14} sx={sx} sy={sy} floatY={10} duration={8} delay={0.45}>
+          {/* side-project phone (back) */}
+          <Layer className="absolute right-[2%] top-0 z-0 w-[26%]" depth={14} sx={sx} sy={sy} floatY={10} duration={8} delay={0.45}>
             <div className="rotate-[5deg]">
-              <IPhone src="/apps/mawaqeet/prayer.webp" alt="Mawaqeet prayer times in Night Mode" priority sizes="200px" />
+              <IPhone src="/apps/mrasem/categories.webp" alt="Mrasem, an iOS side project" priority sizes="160px" />
             </div>
           </Layer>
 
-          {/* Mrasem phone (front) */}
-          <Layer className="absolute right-[9%] top-[31%] z-20 w-[34%]" depth={26} sx={sx} sy={sy} floatY={-12} duration={6.5} delay={0.6}>
-            <div className="-rotate-[3deg]">
-              <IPhone src="/apps/mrasem/categories.webp" alt="Mrasem category home screen" priority sizes="220px" />
+          {/* terraform apply */}
+          <Layer className="absolute right-0 top-[45%] z-20 w-[60%]" depth={24} sx={sx} sy={sy} floatY={-10} duration={6.5} delay={0.6}>
+            <div className="overflow-hidden rounded-lg border border-white/10 bg-dark-elevated shadow-[0_30px_60px_-24px_rgba(20,20,19,0.6)]">
+              <div className="flex items-center justify-between border-b border-white/5 px-3.5 py-2 font-mono text-[10px] text-on-dark-soft">
+                <span>infra/ — terraform</span>
+                <span className="hidden text-[#a58cff] sm:inline">aws · us-east-1</span>
+              </div>
+              <div className="px-3.5 py-3 font-mono text-[9px] leading-[1.8] text-on-dark-soft sm:text-[10.5px]">
+                {tfLines.map((line, i) => (
+                  <motion.p
+                    key={i}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.4 + i * 0.22 }}
+                    className={`whitespace-pre ${line.cls}`}
+                  >
+                    {line.text}
+                  </motion.p>
+                ))}
+              </div>
             </div>
           </Layer>
 
           {/* deploy terminal */}
-          <Layer className="absolute bottom-[4%] left-[3%] z-30 w-[52%]" depth={36} sx={sx} sy={sy} floatY={8} duration={7.5} delay={0.75}>
+          <Layer className="absolute bottom-[2%] left-[2%] z-30 w-[52%]" depth={36} sx={sx} sy={sy} floatY={8} duration={7.5} delay={0.75}>
             <div className="overflow-hidden rounded-lg border border-white/10 bg-dark/95 shadow-[0_30px_60px_-24px_rgba(20,20,19,0.6)] backdrop-blur">
               <div className="border-b border-white/5 px-3.5 py-2 font-mono text-[10px] text-on-dark-soft">zsh — prod</div>
               <div className="px-3.5 py-3 font-mono text-[10px] leading-[1.8] text-on-dark sm:text-[11px]">
@@ -245,7 +272,7 @@ export default function HeroSection() {
                     key={name}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 2.1 + i * 0.25 }}
+                    transition={{ delay: 2.8 + i * 0.25 }}
                     className="whitespace-pre"
                   >
                     {name.padEnd(24, " ")}

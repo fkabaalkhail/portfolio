@@ -7,11 +7,10 @@ interface CaseStudyCardProps {
   imageSrc: string;
   imageAlt: string;
   href: string;
-  index: number;
   tags: string[];
 }
 
-export default function CaseStudyCard({ title, imageSrc, imageAlt, href, index, tags }: CaseStudyCardProps) {
+export default function CaseStudyCard({ title, imageSrc, imageAlt, href, tags }: CaseStudyCardProps) {
   const isExternal = /^https?:\/\//.test(href);
 
   const card = (
@@ -27,8 +26,7 @@ export default function CaseStudyCard({ title, imageSrc, imageAlt, href, index, 
       </div>
       <div className="flex items-start justify-between gap-4 px-1 pb-1 pt-5">
         <div>
-          <p className="font-mono text-xs text-muted-soft">0{index + 1}</p>
-          <h3 className="mt-1 font-display text-2xl tracking-[-0.01em] text-ink">{title}</h3>
+          <h3 className="font-display text-2xl tracking-[-0.01em] text-ink">{title}</h3>
           <div className="mt-3 flex flex-wrap gap-1.5">
             {tags.map((t) => (
               <span key={t} className="rounded-full bg-surface-card px-2.5 py-0.5 text-xs font-medium text-body">

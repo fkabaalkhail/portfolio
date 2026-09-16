@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Check, Copy } from "lucide-react";
 import { siteConfig } from "@/lib/constants";
-import { Reveal, SplitWords } from "@/components/motion/primitives";
+import { Reveal, RollingLabel, SplitWords, rollingParent } from "@/components/motion/primitives";
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
@@ -29,21 +29,22 @@ export default function ContactSection() {
               <SplitWords text="Have a product to build?" /> <SplitWords text="Let's talk." delay={0.15} />
             </h2>
             <p className="mt-4 max-w-md text-lg leading-relaxed text-white/85">
-              Open to full-stack, backend and platform roles — and to interesting iOS projects.
+              Open to software engineering, DevOps and cloud roles.
             </p>
           </div>
           <div className="flex flex-col gap-3 md:items-end">
-            <a
+            <motion.a
               href={`mailto:${siteConfig.email}`}
+              {...rollingParent}
               className="group inline-flex h-12 items-center justify-center gap-2 rounded-md bg-canvas px-6 text-sm font-medium text-ink transition-colors hover:bg-surface-soft"
             >
-              Email me
+              <RollingLabel>Email me</RollingLabel>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </a>
+            </motion.a>
             <button
               onClick={copyEmail}
               aria-live="polite"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-white/40 px-5 font-mono text-sm transition-colors hover:bg-white/10"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-white/40 px-5 text-sm transition-colors hover:bg-white/10"
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span

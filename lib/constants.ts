@@ -47,9 +47,9 @@ export interface Project {
 export const siteConfig = {
   name: "Fahad Aba-Alkhail",
   location: "Ottawa, Canada",
-  role: "Full-Stack Engineer",
+  role: "Software Engineer",
   intro:
-    "I ship SwiftUI and Next.js front ends, Node and FastAPI services, and the Kubernetes infrastructure they run on. Magna cum laude Computer Science graduate from uOttawa, now a software engineer at Ericsson.",
+    "Full-stack software engineer across backend services, cloud infrastructure and DevOps — currently running Kubernetes and data platforms at Ericsson. Magna cum laude Computer Science graduate from uOttawa.",
   email: "fk.abaalkhail@gmail.com",
   github: "https://github.com/fkabaalkhail",
   education: {
@@ -161,9 +161,9 @@ export const siteConfig = {
 
 export const navLinks = [
   { label: "About", href: "#about" },
-  { label: "Apps", href: "#apps" },
-  { label: "Stack", href: "#stack" },
   { label: "Experience", href: "#experience" },
+  { label: "Stack", href: "#stack" },
+  { label: "Projects", href: "#apps" },
   { label: "How I Work", href: "#workflow" },
   { label: "Case Studies", href: "#case-studies" },
 ] as const;

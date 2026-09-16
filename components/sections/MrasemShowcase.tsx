@@ -41,7 +41,7 @@ export default function MrasemShowcase() {
         <div className="flex flex-wrap items-center gap-3">
           <Image src="/apps/mrasem/logo.png" alt="Mrasem logo" width={786} height={410} className="h-14 w-auto" />
           <span className="rounded-full border border-gold/30 px-3 py-1 text-xs font-medium uppercase tracking-[1.5px] text-gold">
-            01 · iOS + Admin + API
+            iOS · Admin · API
           </span>
         </div>
         <h3 className="mt-8 max-w-3xl font-display text-[clamp(2.25rem,4.6vw,3.5rem)] font-normal leading-[1.08] tracking-[-0.02em]">
@@ -71,7 +71,7 @@ export default function MrasemShowcase() {
                 transition={{ duration: 0.5 }}
                 className="max-w-md"
               >
-                <span className="font-mono text-sm text-gold">0{i + 1} / 0{features.length}</span>
+                <span className="text-xs font-medium uppercase tracking-[1.5px] text-gold">{tabs[i]}</span>
                 <h4 className="mt-3 font-display text-3xl font-normal tracking-[-0.01em] md:text-4xl">{f.title}</h4>
                 <p className="mt-4 text-lg leading-relaxed text-on-dark/60">{f.body}</p>
                 {/* inline phone on small screens, where the sticky one is hidden */}
@@ -159,7 +159,7 @@ export default function MrasemShowcase() {
               Every screen, bilingual EN / AR
             </h4>
           </Reveal>
-          <p className="font-mono text-xs text-on-dark/40">← drag to explore →</p>
+          <p className="text-sm text-on-dark/45">Drag to explore</p>
         </div>
         <div ref={galleryRef} className="mt-8 overflow-hidden px-6 pb-4 md:px-14">
           <motion.div

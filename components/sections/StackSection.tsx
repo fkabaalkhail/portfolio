@@ -110,9 +110,7 @@ export default function StackSection() {
                 className="grid gap-8 md:grid-cols-[1fr_1.2fr] md:items-center"
               >
                 <div>
-                  <p className="font-mono text-xs text-accent-soft">
-                    0{active + 1} / {layer.label.toLowerCase()}
-                  </p>
+                  <p className="text-sm text-on-dark-soft">{layer.summary}</p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {layer.items.map((item, i) => (
                       <motion.span

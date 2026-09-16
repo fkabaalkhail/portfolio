@@ -36,7 +36,6 @@ export default function CaseStudyGrid() {
                 imageSrc={study.imageSrc}
                 imageAlt={study.imageAlt}
                 href={study.href}
-                index={i}
                 tags={tags[study.id] ?? []}
               />
             </Reveal>

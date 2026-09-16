@@ -1,29 +1,29 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Newsreader } from "next/font/google";
+import { Fira_Code, Newsreader, Schibsted_Grotesk } from "next/font/google";
 import "./globals.css";
 import SkipToContent from "@/components/layout/SkipToContent";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import MotionProvider from "@/components/motion/MotionProvider";
 
-const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-body" });
+const grotesk = Schibsted_Grotesk({ subsets: ["latin"], display: "swap", variable: "--font-body" });
 const newsreader = Newsreader({
   subsets: ["latin"],
   style: ["normal", "italic"],
   display: "swap",
   variable: "--font-serif-display",
 });
-const jetbrains = JetBrains_Mono({ subsets: ["latin"], display: "swap", variable: "--font-code" });
+const firaCode = Fira_Code({ subsets: ["latin"], display: "swap", variable: "--font-code" });
 
 export const metadata: Metadata = {
-  title: "Fahad Aba-Alkhail | Full-Stack Engineer",
+  title: "Fahad Aba-Alkhail | Software Engineer",
   description:
-    "Fahad Aba-Alkhail — full-stack engineer shipping SwiftUI apps, Node and FastAPI services, and Kubernetes infrastructure on AWS and GCP.",
+    "Fahad Aba-Alkhail — full-stack software engineer working across backend services, cloud infrastructure and DevOps.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${newsreader.variable} ${jetbrains.variable}`}>
+    <html lang="en" className={`${grotesk.variable} ${newsreader.variable} ${firaCode.variable}`}>
       <body className="min-h-screen flex flex-col bg-canvas text-body font-sans">
         <MotionProvider>
           <SkipToContent />

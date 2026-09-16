@@ -11,13 +11,13 @@ export default function AppsSection() {
       <div className="mx-auto max-w-[1280px]">
         <div className="mx-auto mb-12 grid max-w-[1200px] gap-6 px-2 md:px-5 lg:grid-cols-[1.2fr_1fr] lg:items-end">
           <div>
-            <Eyebrow>Selected apps</Eyebrow>
-            <SectionHeading className="mt-4" title="Shipped to real phones," muted="with the backends to match." />
+            <Eyebrow>Side projects</Eyebrow>
+            <SectionHeading className="mt-4" title="Built on the side," muted="shipped like production." />
           </div>
           <Reveal delay={0.1}>
             <p className="text-lg leading-relaxed text-body lg:pb-2">
-              Three iOS products I designed and built end to end — native SwiftUI clients, their APIs and data, and the
-              admin tooling around them.
+              iOS apps I build in my own time. Each one gets the full treatment — its own API, database, auth and
+              deployment — which keeps my backend and infrastructure skills sharp outside work.
             </p>
           </Reveal>
         </div>

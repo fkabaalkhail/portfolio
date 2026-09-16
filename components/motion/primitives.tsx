@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { animate, motion, useInView, useReducedMotion, type HTMLMotionProps } from "framer-motion";
+import { animate, motion, useInView, useReducedMotion, type HTMLMotionProps, type Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export const EASE_OUT = [0.22, 1, 0.36, 1] as const;
@@ -171,3 +171,23 @@ export function TechLogo({
     <img src={icon} alt={name} width={size} height={size} loading="lazy" className={cn("object-contain", className)} />
   );
 }
+
+const rollOut: Variants = { rest: { y: "0%" }, active: { y: "100%" } };
+const rollIn: Variants = { rest: { y: "-100%" }, active: { y: "0%" } };
+const rollTransition = { duration: 0.3, ease: [0.338, 0.015, 0.395, 0.959] as const };
+
+// label that rolls a duplicate into place on hover (motion.dev "rolling text button")
+export function RollingLabel({ children }: { children: string }) {
+  return (
+    <span className="relative block overflow-hidden" aria-label={children}>
+      <motion.span aria-hidden className="block whitespace-nowrap" variants={rollOut} transition={rollTransition}>
+        {children}
+      </motion.span>
+      <motion.span aria-hidden className="absolute inset-0 block whitespace-nowrap" variants={rollIn} transition={rollTransition}>
+        {children}
+      </motion.span>
+    </span>
+  );
+}
+
+export const rollingParent = { initial: "rest", whileHover: "active", whileFocus: "active" } as const;
