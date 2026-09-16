@@ -66,11 +66,8 @@ export default function Navbar() {
         )}
       >
         <nav className="mx-auto flex h-16 max-w-[1200px] items-center justify-between gap-6 px-5 md:px-8">
-          <Link href="/" className="flex items-center gap-2.5 text-ink">
-            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-ink font-mono text-xs font-medium text-canvas">
-              FA
-            </span>
-            <span className="text-[15px] font-medium">{siteConfig.name}</span>
+          <Link href="/" aria-label={`${siteConfig.name} — home`} className="font-display text-[28px] leading-none tracking-[-0.02em] text-ink">
+            fahad<span className="text-coral">.</span>
           </Link>
 
           <div className="hidden items-center gap-1 lg:flex">

@@ -39,7 +39,7 @@ export default function MrasemShowcase() {
       {/* header */}
       <div className="relative px-6 pt-14 md:px-14 md:pt-20">
         <div className="flex flex-wrap items-center gap-3">
-          <Image src="/apps/mrasem/logo.png" alt="Mrasem logo" width={120} height={48} className="h-10 w-auto" />
+          <Image src="/apps/mrasem/logo.png" alt="Mrasem logo" width={786} height={410} className="h-14 w-auto" />
           <span className="rounded-full border border-gold/30 px-3 py-1 text-xs font-medium uppercase tracking-[1.5px] text-gold">
             01 · iOS + Admin + API
           </span>

@@ -22,12 +22,9 @@ export default function Footer() {
     <footer className="bg-dark px-5 py-16 text-on-dark-soft md:px-8">
       <div className="mx-auto grid max-w-[1200px] gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
         <div>
-          <div className="flex items-center gap-2.5 text-on-dark">
-            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-on-dark font-mono text-xs font-medium text-dark">
-              FA
-            </span>
-            <span className="text-[15px] font-medium">{siteConfig.name}</span>
-          </div>
+          <p className="font-display text-4xl leading-none tracking-[-0.02em] text-on-dark">
+            fahad<span className="text-coral">.</span>
+          </p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed">
             {siteConfig.role} in {siteConfig.location}. SwiftUI to Kubernetes.
           </p>
