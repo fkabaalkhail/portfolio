@@ -17,7 +17,7 @@ const features = [
   { icon: Compass, title: "Qibla compass", body: "CoreMotion heading with live direction to Makkah." },
   { icon: CalendarDays, title: "Hijri calendar", body: "Maghrib-based date transitions with ±2 day correction." },
   { icon: CheckCircle2, title: "Prayer tracker", body: "Mark each prayer complete and review a 7-day trend." },
-  { icon: CreditCard, title: "Stripe + Apple Pay", body: "Dockerised Node/Express backend for support payments." },
+  { icon: CreditCard, title: "Stripe + Apple Pay", body: "Dockerised Node.js backend for support payments." },
   { icon: Languages, title: "Arabic / English", body: "Full localisation with right-to-left layouts." },
 ];
 
