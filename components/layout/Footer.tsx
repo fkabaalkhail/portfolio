@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import { siteConfig } from "@/lib/constants";
 
@@ -20,30 +21,41 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative z-10 border-t border-white/[0.06] py-8">
-      <div className="mx-auto max-w-6xl px-4 flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
-        <p className="text-white/30 text-sm">
-          &copy; {new Date().getFullYear()} {siteConfig.name}
+    <footer className="relative z-10 overflow-hidden px-5 pt-10 md:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 sm:flex-row sm:justify-between">
+        <p className="text-sm text-muted">
+          &copy; {new Date().getFullYear()} {siteConfig.name} · Built with Next.js & Framer Motion
         </p>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           <a
             href={siteConfig.github}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub profile"
-            className="text-white/30 hover:text-white transition-colors"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/10 text-ink transition-all hover:-translate-y-0.5 hover:bg-ink hover:text-paper"
           >
             <GithubIcon className="h-5 w-5" />
           </a>
           <a
             href={`mailto:${siteConfig.email}`}
             aria-label="Send email"
-            className="text-white/30 hover:text-white transition-colors"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/10 text-ink transition-all hover:-translate-y-0.5 hover:bg-ember hover:text-white"
           >
             <Mail className="h-5 w-5" />
           </a>
         </div>
       </div>
+      {/* giant cropped wordmark */}
+      <motion.p
+        aria-hidden
+        initial={{ y: "40%", opacity: 0 }}
+        whileInView={{ y: "10%", opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+        className="pointer-events-none mt-6 select-none text-center font-display text-[24vw] font-bold leading-[0.8] tracking-[-0.07em] text-ink"
+      >
+        fahad<span className="text-ember">.</span>
+      </motion.p>
     </footer>
   );
 }

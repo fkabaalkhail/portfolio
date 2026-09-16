@@ -1,232 +1,163 @@
 "use client";
 
-import { Mail, TreePine, Aperture, ChessKnight, Trophy } from "lucide-react";
 import Image from "next/image";
-import SectionWrapper from "@/components/ui/SectionWrapper";
-import ExperienceCard from "@/components/ui/ExperienceCard";
+import { motion } from "framer-motion";
+import { Aperture, ChessKnight, TreePine, Trophy } from "lucide-react";
 import { siteConfig } from "@/lib/constants";
+import { CountUp, EASE_OUT, Eyebrow, Reveal, SplitWords } from "@/components/motion/primitives";
+import { cn } from "@/lib/utils";
 
-function GithubIcon({ className }: { className?: string }) {
+const interestIcons = [TreePine, Aperture, ChessKnight, Trophy];
+const categoryStyles = [
+  { card: "bg-sun", chip: "bg-ink/10 text-ink", prompt: "ls ~/languages" },
+  { card: "bg-sky", chip: "bg-ink/10 text-ink", prompt: "kubectl get nodes" },
+  { card: "bg-mint", chip: "bg-ink/10 text-ink", prompt: "docker compose ps" },
+  { card: "bg-plum", chip: "bg-ink/10 text-ink", prompt: "helm list -n monitoring" },
+  { card: "bg-ember text-white", chip: "bg-white/20 text-white", prompt: "netstat -tulpn" },
+];
+
+function Tile({
+  children,
+  className,
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-    </svg>
+    <motion.div
+      initial={{ opacity: 0, y: 40, scale: 0.97 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.8, ease: EASE_OUT, delay }}
+      whileHover={{ y: -6 }}
+      className={cn("relative overflow-hidden rounded-[2rem] p-7 md:p-8", className)}
+    >
+      {children}
+    </motion.div>
   );
 }
 
 export default function AboutSection() {
-  const { education, experiences, skillCategories, interests, github, email } = siteConfig;
-
-  const interestIcons = [
-    <TreePine key="hiking" className="h-5 w-5 text-white/50 shrink-0" />,
-    <Aperture key="photo" className="h-5 w-5 text-white/50 shrink-0" />,
-    <ChessKnight key="chess" className="h-5 w-5 text-white/50 shrink-0" />,
-    <Trophy key="football" className="h-5 w-5 text-white/50 shrink-0" />,
-  ];
+  const { education, skillCategories, interests } = siteConfig;
 
   return (
-    <SectionWrapper id="about" className="px-6 py-16 md:py-24">
-      <div className="mx-auto max-w-4xl space-y-20">
+    <section id="about" className="scroll-mt-20 px-5 py-20 md:px-8 md:py-28">
+      <div className="mx-auto max-w-7xl">
+        <Reveal>
+          <Eyebrow className="text-ember">About</Eyebrow>
+        </Reveal>
+        <h2 className="mt-5 max-w-4xl font-display text-[clamp(2.5rem,5.5vw,4.75rem)] font-bold leading-[0.92] tracking-[-0.045em]">
+          <SplitWords text="Infra brain," /> <SplitWords text="product heart." delay={0.15} wordClassName="font-serif font-normal italic text-ember" />
+        </h2>
 
-        {/* Education */}
-        <div>
-          <h2 className="text-center text-2xl font-bold text-white md:text-3xl mb-8">Education</h2>
-          <div className="rounded-xl border border-white/[0.08] bg-[#0a0a0a] p-8">
-            <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg overflow-hidden bg-white/[0.05] p-1">
-                <Image
-                  src="/images/uottawa-favicon.png"
-                  alt="University of Ottawa logo"
-                  width={40}
-                  height={40}
-                  className="object-contain"
-                />
+        <div className="mt-12 grid auto-rows-auto gap-4 md:grid-cols-6">
+          {/* education */}
+          <Tile className="bg-ink text-paper md:col-span-4">
+            <div className="flex items-center gap-4">
+              <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl bg-white p-1.5">
+                <Image src="/images/uottawa-favicon.png" alt="University of Ottawa logo" width={44} height={44} className="object-contain" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white">{education.university}</h3>
-                <p className="mt-1 text-white/60 font-medium">{education.program}</p>
-                <div className="mt-3 flex flex-wrap gap-3">
-                  <span className="inline-flex items-center rounded-full bg-white/[0.04] px-3 py-1 text-sm font-medium text-white/50 border border-white/[0.08]">
-                    GPA: {education.gpa}
-                  </span>
-                  <span className="inline-flex items-center rounded-full bg-white/[0.04] px-3 py-1 text-sm font-medium text-white/50 border border-white/[0.08]">
-                    Graduating {education.graduationDate}
-                  </span>
-                </div>
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-sun">Education</p>
+                <h3 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{education.university}</h3>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Experience Timeline */}
-        <div>
-          <h2 className="text-center text-2xl font-bold text-white md:text-3xl mb-10">Experience</h2>
-          <div className="max-w-3xl mx-auto">
-            {experiences.map((exp) => (
-              <ExperienceCard
-                key={exp.company}
-                company={exp.company}
-                role={exp.role}
-                period={exp.period}
-                achievements={exp.achievements}
-                logo={exp.logo}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Skills - Terminal style */}
-        <div>
-          <h2 className="text-center text-2xl font-bold text-white md:text-3xl mb-8">Skills</h2>
-          <div className="rounded-xl border border-white/[0.08] bg-[#0a0a0a] overflow-hidden">
-            {/* Terminal header */}
-            <div className="flex items-center gap-2 px-4 py-2.5 bg-[#111] border-b border-white/[0.08]">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-                <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
-                <div className="w-3 h-3 rounded-full bg-[#28c840]" />
-              </div>
-              <span className="ml-3 text-xs font-mono text-white/40">fahad@dev:~</span>
-            </div>
-            {/* Terminal content */}
-            <div className="p-6 md:p-8 font-mono text-sm space-y-5">
-              {/* Languages */}
+            <p className="mt-6 text-lg text-paper/70">{education.program}</p>
+            <div className="mt-10 flex flex-wrap items-end gap-10">
               <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[#28c840]">~</span>
-                  <span className="text-white/70">ls ~/languages/</span>
-                </div>
-                <div className="pl-4 flex flex-wrap gap-1.5">
-                  {skillCategories[0]?.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="inline-block rounded bg-white/[0.04] border border-white/[0.08] px-2.5 py-1 text-xs text-white/55 hover:border-white/[0.15] hover:text-white/80 transition-all cursor-default"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
+                <CountUp to={3.9} decimals={1} className="font-display text-7xl font-bold tracking-tighter text-sun md:text-8xl" />
+                <p className="mt-1 text-sm text-paper/50">GPA out of 4.0</p>
               </div>
-
-              {/* Cloud & DevOps */}
               <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[#28c840]">~</span>
-                  <span className="text-white/70">kubectl get nodes -o wide</span>
-                </div>
-                <div className="pl-4 flex flex-wrap gap-1.5">
-                  {skillCategories[1]?.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="inline-block rounded bg-white/[0.04] border border-white/[0.08] px-2.5 py-1 text-xs text-[#87d65a]/70 hover:text-[#87d65a] transition-all cursor-default"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Backend */}
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[#28c840]">~</span>
-                  <span className="text-white/70">docker compose ps --services</span>
-                </div>
-                <div className="pl-4 flex flex-wrap gap-1.5">
-                  {skillCategories[2]?.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="inline-block rounded bg-white/[0.04] border border-white/[0.08] px-2.5 py-1 text-xs text-[#61afef]/70 hover:text-[#61afef] transition-all cursor-default"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Monitoring */}
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[#28c840]">~</span>
-                  <span className="text-white/70">helm list -n monitoring</span>
-                </div>
-                <div className="pl-4 flex flex-wrap gap-1.5">
-                  {skillCategories[3]?.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="inline-block rounded bg-white/[0.04] border border-white/[0.08] px-2.5 py-1 text-xs text-[#e5c07b]/70 hover:text-[#e5c07b] transition-all cursor-default"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Networking */}
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[#28c840]">~</span>
-                  <span className="text-white/70">netstat -tulpn | grep LISTEN</span>
-                </div>
-                <div className="pl-4 flex flex-wrap gap-1.5">
-                  {skillCategories[4]?.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="inline-block rounded bg-white/[0.04] border border-white/[0.08] px-2.5 py-1 text-xs text-[#c678dd]/70 hover:text-[#c678dd] transition-all cursor-default"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Blinking cursor */}
-              <div className="flex items-center gap-2 pt-2">
-                <span className="text-[#28c840]">~</span>
-                <span className="w-2 h-4 bg-[#28c840]/70 animate-pulse" />
+                <span className="font-display text-7xl font-bold tracking-tighter md:text-8xl">
+                  &apos;{education.graduationDate.slice(2)}
+                </span>
+                <p className="mt-1 text-sm text-paper/50">Graduating {education.graduationDate}</p>
               </div>
             </div>
-          </div>
-        </div>
+          </Tile>
 
-        {/* Interests */}
-        <div>
-          <h2 className="text-center text-2xl font-bold text-white md:text-3xl mb-8">Interests</h2>
-          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
-            {interests.map((interest, i) => (
-              <div
-                key={interest}
-                className="flex items-center gap-3 rounded-lg border border-white/[0.06] bg-[#0a0a0a] px-5 py-4 hover:border-white/[0.12] transition-colors"
+          {/* impact stats */}
+          <Tile className="flex flex-col justify-between bg-ember text-white md:col-span-2" delay={0.08}>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-white/80">Impact</p>
+            <div className="mt-8 space-y-6">
+              <div>
+                <CountUp to={35} suffix="%" className="font-display text-6xl font-bold tracking-tighter" />
+                <p className="text-sm text-white/80">lower data access latency at Ericsson</p>
+              </div>
+              <div>
+                <CountUp to={30} suffix="%" className="font-display text-6xl font-bold tracking-tighter" />
+                <p className="text-sm text-white/80">cloud compute spend cut at HAMS.AI</p>
+              </div>
+            </div>
+          </Tile>
+
+          {/* skills */}
+          {skillCategories.map((cat, i) => {
+            const style = categoryStyles[i % categoryStyles.length];
+            return (
+              <Tile
+                key={cat.name}
+                delay={0.05 * i}
+                className={cn(style.card, "text-ink", i < 2 ? "md:col-span-3" : "md:col-span-2")}
               >
-                {interestIcons[i]}
-                <span className="text-white/50 text-sm">{interest}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+                <p className="font-mono text-xs opacity-70">
+                  <span className="opacity-60">~ $</span> {style.prompt}
+                </p>
+                <h3 className="mt-3 font-display text-2xl font-bold tracking-tight">{cat.name}</h3>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {cat.skills.map((skill, j) => (
+                    <motion.span
+                      key={skill}
+                      initial={{ opacity: 0, scale: 0.6 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ type: "spring", stiffness: 400, damping: 20, delay: 0.2 + j * 0.035 }}
+                      whileHover={{ scale: 1.08, rotate: j % 2 ? 2 : -2 }}
+                      className={cn("cursor-default rounded-full px-3 py-1.5 text-sm font-medium", style.chip)}
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </div>
+              </Tile>
+            );
+          })}
 
-        {/* Contact */}
-        <div className="flex justify-center gap-4">
-          <a
-            href={github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub profile"
-            className="inline-flex items-center gap-2 rounded-lg border border-white/[0.08] bg-[#0a0a0a] px-5 py-3 text-white/50 hover:border-white/[0.15] hover:text-white transition-all duration-200"
-          >
-            <GithubIcon className="h-5 w-5" />
-            <span className="font-medium">GitHub</span>
-          </a>
-          <a
-            href={`mailto:${email}`}
-            aria-label="Send email"
-            className="inline-flex items-center gap-2 rounded-lg border border-white/[0.15] bg-white/[0.06] px-5 py-3 text-white/70 hover:bg-white/[0.1] hover:text-white transition-all duration-200"
-          >
-            <Mail className="h-5 w-5" />
-            <span className="font-medium">Email</span>
-          </a>
+          {/* interests */}
+          <Tile className="border border-ink/10 bg-paper md:col-span-6" delay={0.1}>
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              <div>
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-ember">Off the keyboard</p>
+                <h3 className="mt-2 font-display text-2xl font-bold tracking-tight">Interests</h3>
+              </div>
+              <div className="grid flex-1 gap-3 sm:grid-cols-2 lg:max-w-3xl lg:grid-cols-4">
+                {interests.map((interest, i) => {
+                  const Icon = interestIcons[i % interestIcons.length];
+                  return (
+                    <motion.div
+                      key={interest}
+                      whileHover="hover"
+                      className="flex items-center gap-3 rounded-2xl bg-cream px-4 py-3"
+                    >
+                      <motion.span
+                        variants={{ hover: { rotate: [0, -14, 12, -6, 0], scale: 1.15 } }}
+                        transition={{ duration: 0.6 }}
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-ink text-sun"
+                      >
+                        <Icon className="h-4 w-4" />
+                      </motion.span>
+                      <span className="text-sm text-ink/75">{interest}</span>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          </Tile>
         </div>
       </div>
-    </SectionWrapper>
+    </section>
   );
 }

@@ -145,8 +145,61 @@ export const siteConfig = {
 };
 
 export const navLinks = [
+  { label: "Apps", href: "#apps" },
+  { label: "Experience", href: "#experience" },
   { label: "About", href: "#about" },
   { label: "How I Work", href: "#workflow" },
-  { label: "Projects", href: "#projects" },
   { label: "Case Studies", href: "#case-studies" },
 ] as const;
+
+export interface AppFeature {
+  title: string;
+  body: string;
+  screen: string;
+}
+
+// screenshots for the iOS app showcases (captured from the iOS simulator)
+export const appShowcase = {
+  mrasem: {
+    features: [
+      {
+        title: "Curated luxury, one tap away",
+        body: "Season events, tours, fine dining and chauffeured cars — all browsable from a single category home built in SwiftUI.",
+        screen: "/apps/mrasem/categories.webp",
+      },
+      {
+        title: "Discovery that feels premium",
+        body: "Rich restaurant cards with Michelin tags, ratings and cuisine filters, backed by a Supabase catalogue managed from the admin panel.",
+        screen: "/apps/mrasem/restaurants.webp",
+      },
+      {
+        title: "Booking in three steps",
+        body: "Date, time, guests and add-on services flow into a request the team approves from the Next.js admin dashboard.",
+        screen: "/apps/mrasem/booking.webp",
+      },
+      {
+        title: "Tickets straight to Apple Wallet",
+        body: "Every confirmed booking issues a QR pass that can be added to Apple Wallet, alongside an SMS confirmation to the phone used for OTP sign-in.",
+        screen: "/apps/mrasem/confirmed.webp",
+      },
+    ] as AppFeature[],
+    gallery: [
+      { src: "/apps/mrasem/splash.webp", label: "Splash" },
+      { src: "/apps/mrasem/login.webp", label: "Phone OTP login" },
+      { src: "/apps/mrasem/detail.webp", label: "Venue detail" },
+      { src: "/apps/mrasem/membership.webp", label: "Membership card" },
+      { src: "/apps/mrasem/booking-event.webp", label: "Event booking" },
+      { src: "/apps/mrasem/car-booking-ar.webp", label: "Arabic RTL" },
+      { src: "/apps/mrasem/invitations.webp", label: "Invitations" },
+    ],
+  },
+  mawaqeet: {
+    // captured in the app's Night Mode
+    screens: {
+      prayer: "/apps/mawaqeet/prayer.webp",
+      prayerArabic: "/apps/mawaqeet/prayer-ar.webp",
+      qibla: "/apps/mawaqeet/qibla.webp",
+      tracker: "/apps/mawaqeet/tracker.webp",
+    },
+  },
+};
