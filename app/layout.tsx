@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Bricolage_Grotesque, Instrument_Serif, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
 import SkipToContent from "@/components/layout/SkipToContent";
 import Navbar from "@/components/layout/Navbar";
@@ -7,29 +7,24 @@ import Footer from "@/components/layout/Footer";
 import MotionProvider from "@/components/motion/MotionProvider";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-body" });
-const grotesque = Bricolage_Grotesque({ subsets: ["latin"], display: "swap", variable: "--font-grotesque" });
-const instrument = Instrument_Serif({
+const newsreader = Newsreader({
   subsets: ["latin"],
-  weight: "400",
   style: ["normal", "italic"],
   display: "swap",
-  variable: "--font-instrument",
+  variable: "--font-serif-display",
 });
-const geistMono = Geist_Mono({ subsets: ["latin"], display: "swap", variable: "--font-geist-mono" });
+const jetbrains = JetBrains_Mono({ subsets: ["latin"], display: "swap", variable: "--font-code" });
 
 export const metadata: Metadata = {
-  title: "Fahad Aba-Alkhail | Portfolio",
+  title: "Fahad Aba-Alkhail | Full-Stack Engineer",
   description:
-    "Portfolio of Fahad Aba-Alkhail — software engineer building cloud infrastructure and iOS apps like Mrasem and Mawaqeet.",
+    "Fahad Aba-Alkhail — full-stack engineer shipping SwiftUI apps, Node and FastAPI services, and Kubernetes infrastructure on AWS and GCP.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${grotesque.variable} ${instrument.variable} ${geistMono.variable}`}
-    >
-      <body className="grain min-h-screen flex flex-col bg-cream text-ink font-sans">
+    <html lang="en" className={`${inter.variable} ${newsreader.variable} ${jetbrains.variable}`}>
+      <body className="min-h-screen flex flex-col bg-canvas text-body font-sans">
         <MotionProvider>
           <SkipToContent />
           <Navbar />

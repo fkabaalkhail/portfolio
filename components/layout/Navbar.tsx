@@ -22,7 +22,7 @@ export default function Navbar() {
 
   useEffect(() => {
     if (isServiceSite) return;
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -59,29 +59,21 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.div
-        style={{ scaleX: progress }}
-        className="fixed inset-x-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-ember via-sun to-plum"
-      />
-      <motion.header
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-        className="fixed inset-x-0 top-3 z-50 flex justify-center px-3"
+      <header
+        className={cn(
+          "sticky top-0 z-50 border-b bg-canvas/90 backdrop-blur-md transition-colors duration-300",
+          scrolled || menuOpen ? "border-hairline" : "border-transparent"
+        )}
       >
-        <nav
-          className={cn(
-            "flex w-full max-w-4xl items-center justify-between gap-4 rounded-full border px-2 py-2 pl-5 transition-all duration-500",
-            scrolled || menuOpen
-              ? "border-ink/10 bg-paper/75 shadow-[0_10px_40px_-12px_rgba(23,18,13,0.25)] backdrop-blur-xl"
-              : "border-transparent bg-transparent"
-          )}
-        >
-          <Link href="/" className="font-display text-lg font-bold tracking-tight text-ink">
-            fahad<span className="text-ember">.</span>
+        <nav className="mx-auto flex h-16 max-w-[1200px] items-center justify-between gap-6 px-5 md:px-8">
+          <Link href="/" className="flex items-center gap-2.5 text-ink">
+            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-ink font-mono text-xs font-medium text-canvas">
+              FA
+            </span>
+            <span className="text-[15px] font-medium">{siteConfig.name}</span>
           </Link>
 
-          <div className="relative hidden items-center gap-1 md:flex">
+          <div className="hidden items-center gap-1 lg:flex">
             {navLinks.map((link) => {
               const isActive = active === link.href.slice(1);
               return (
@@ -89,18 +81,18 @@ export default function Navbar() {
                   key={link.href}
                   onClick={() => handleClick(link.href)}
                   className={cn(
-                    "relative rounded-full px-3.5 py-2 text-sm font-medium transition-colors",
-                    isActive ? "text-paper" : "text-ink/60 hover:text-ink"
+                    "relative rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                    isActive ? "text-ink" : "text-muted hover:text-ink"
                   )}
                 >
                   {isActive && (
                     <motion.span
-                      layoutId="nav-pill"
-                      className="absolute inset-0 -z-0 rounded-full bg-ink"
-                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                      layoutId="nav-active"
+                      className="absolute inset-0 rounded-md bg-surface-card"
+                      transition={{ type: "spring", stiffness: 420, damping: 36 }}
                     />
                   )}
-                  <span className="relative z-10">{link.label}</span>
+                  <span className="relative">{link.label}</span>
                 </button>
               );
             })}
@@ -108,13 +100,13 @@ export default function Navbar() {
 
           <a
             href={`mailto:${siteConfig.email}`}
-            className="hidden rounded-full bg-ember px-4 py-2 text-sm font-semibold text-white transition-transform hover:scale-105 active:scale-95 md:inline-flex"
+            className="hidden h-10 items-center rounded-md bg-coral px-5 text-sm font-medium text-white transition-colors hover:bg-coral-active lg:inline-flex"
           >
-            Let&apos;s talk
+            Get in touch
           </a>
 
           <button
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-paper md:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-md border border-hairline text-ink lg:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
@@ -122,38 +114,33 @@ export default function Navbar() {
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </nav>
-      </motion.header>
+        <motion.div style={{ scaleX: progress }} className="absolute inset-x-0 bottom-[-1px] h-px origin-left bg-coral" />
+      </header>
 
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ clipPath: "circle(0% at 92% 40px)" }}
-            animate={{ clipPath: "circle(150% at 92% 40px)" }}
-            exit={{ clipPath: "circle(0% at 92% 40px)" }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-40 flex flex-col justify-center gap-2 bg-ink px-8 md:hidden"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-x-0 bottom-0 top-16 z-40 flex flex-col gap-1 bg-canvas px-5 pt-6 lg:hidden"
           >
-            {navLinks.map((link, i) => (
-              <motion.button
+            {navLinks.map((link) => (
+              <button
                 key={link.href}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15 + i * 0.06, ease: [0.22, 1, 0.36, 1], duration: 0.6 }}
                 onClick={() => handleClick(link.href)}
-                className="text-left font-display text-5xl font-bold tracking-tight text-paper"
+                className="border-b border-hairline py-4 text-left font-display text-3xl text-ink"
               >
                 {link.label}
-              </motion.button>
+              </button>
             ))}
-            <motion.a
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
+            <a
               href={`mailto:${siteConfig.email}`}
-              className="mt-8 font-mono text-sm text-sun"
+              className="mt-8 inline-flex h-12 items-center justify-center rounded-md bg-coral text-base font-medium text-white"
             >
-              {siteConfig.email}
-            </motion.a>
+              Get in touch
+            </a>
           </motion.div>
         )}
       </AnimatePresence>

@@ -4,9 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { siteConfig } from "@/lib/constants";
-import { EASE_OUT, Eyebrow, Reveal, SplitWords } from "@/components/motion/primitives";
-
-const accents = ["bg-sky", "bg-sun", "bg-mint"];
+import { EASE_OUT, Eyebrow, Reveal, SectionHeading } from "@/components/motion/primitives";
 
 export default function ExperienceSection() {
   const listRef = useRef<HTMLOListElement>(null);
@@ -14,78 +12,61 @@ export default function ExperienceSection() {
   const lineScale = useSpring(scrollYProgress, { stiffness: 90, damping: 24 });
 
   return (
-    <section id="experience" className="scroll-mt-20 px-5 py-20 md:px-8 md:py-28">
-      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="lg:sticky lg:top-32 lg:self-start">
-          <Reveal>
-            <Eyebrow className="text-ember">Experience</Eyebrow>
-          </Reveal>
-          <h2 className="mt-5 font-display text-[clamp(2.5rem,5.5vw,4.75rem)] font-bold leading-[0.92] tracking-[-0.045em]">
-            <SplitWords text="Where I've" />
-            <br />
-            <SplitWords text="shipped." delay={0.12} wordClassName="font-serif font-normal italic text-ember" />
-          </h2>
-          <Reveal delay={0.2}>
-            <p className="mt-6 max-w-sm text-lg leading-relaxed text-muted">
-              Kubernetes, data platforms and cloud cost — from a global telecom to early-stage AI startups.
+    <section id="experience" className="scroll-mt-16 border-t border-hairline bg-surface-soft px-5 py-24 md:px-8">
+      <div className="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <Eyebrow>Experience</Eyebrow>
+          <SectionHeading className="mt-4" title="Where I've" muted="shipped." />
+          <Reveal delay={0.1}>
+            <p className="mt-6 max-w-sm text-lg leading-relaxed text-body">
+              Kubernetes, data platforms, APIs and cloud cost — from a global telecom to early-stage startups.
             </p>
           </Reveal>
         </div>
 
-        <ol ref={listRef} className="relative space-y-6 pl-10 md:pl-14">
-          {/* track + scroll-drawn line */}
-          <span className="absolute bottom-4 left-[11px] top-4 w-[2px] rounded-full bg-ink/10 md:left-[19px]" />
+        <ol ref={listRef} className="relative space-y-4 pl-8 md:pl-10">
+          <span className="absolute bottom-6 left-[7px] top-6 w-px bg-hairline md:left-[11px]" />
           <motion.span
             style={{ scaleY: lineScale }}
-            className="absolute bottom-4 left-[11px] top-4 w-[2px] origin-top rounded-full bg-gradient-to-b from-ember via-sun to-plum md:left-[19px]"
+            className="absolute bottom-6 left-[7px] top-6 w-px origin-top bg-coral md:left-[11px]"
           />
 
           {siteConfig.experiences.map((exp, i) => (
             <motion.li
               key={exp.company}
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.8, ease: EASE_OUT }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, ease: EASE_OUT, delay: i * 0.05 }}
               className="relative"
             >
-              <motion.span
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true, amount: 0.8 }}
-                transition={{ type: "spring", stiffness: 400, damping: 18, delay: 0.2 }}
-                className={`absolute -left-10 top-8 flex h-6 w-6 items-center justify-center rounded-full border-4 border-cream ${accents[i % accents.length]} md:-left-[3.1rem]`}
-              />
-              <motion.div
-                whileHover={{ y: -4 }}
-                transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                className="group rounded-3xl border border-ink/10 bg-paper p-6 shadow-[0_1px_0_rgba(23,18,13,0.04)] transition-shadow hover:shadow-[0_24px_60px_-24px_rgba(23,18,13,0.25)] md:p-8"
-              >
+              <span className="absolute -left-8 top-9 flex h-[15px] w-[15px] items-center justify-center rounded-full border border-coral bg-canvas md:-left-10 md:h-[23px] md:w-[23px]">
+                <span className="h-[5px] w-[5px] rounded-full bg-coral md:h-[7px] md:w-[7px]" />
+              </span>
+              <div className="rounded-lg border border-hairline bg-canvas p-6 md:p-8">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div className="flex items-center gap-4">
                     {exp.logo && (
-                      <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-ink/10 bg-white p-1.5">
-                        <Image src={exp.logo} alt={`${exp.company} logo`} width={36} height={36} className="object-contain" />
+                      <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-lg border border-hairline bg-white p-1.5">
+                        <Image src={exp.logo} alt={`${exp.company} logo`} width={32} height={32} className="object-contain" />
                       </div>
                     )}
                     <div>
-                      <h3 className="font-display text-2xl font-bold tracking-tight">{exp.company}</h3>
-                      <p className="text-muted">{exp.role}</p>
+                      <h3 className="font-display text-2xl tracking-[-0.01em] text-ink">{exp.company}</h3>
+                      <p className="text-sm text-muted">{exp.role}</p>
                     </div>
                   </div>
-                  <span className={`rounded-full px-3 py-1 font-mono text-xs text-ink ${accents[i % accents.length]}`}>
-                    {exp.period}
-                  </span>
+                  <span className="rounded-full bg-surface-card px-3 py-1 text-[13px] font-medium text-ink">{exp.period}</span>
                 </div>
-                <ul className="mt-6 space-y-3">
+                <ul className="mt-6 space-y-3 border-t border-hairline-soft pt-5">
                   {exp.achievements.map((a) => (
-                    <li key={a} className="flex gap-3 leading-relaxed text-ink/75">
-                      <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ember" />
+                    <li key={a} className="flex gap-3 leading-relaxed text-body">
+                      <span className="mt-[11px] h-px w-3 shrink-0 bg-coral" />
                       <span>{a}</span>
                     </li>
                   ))}
                 </ul>
-              </motion.div>
+              </div>
             </motion.li>
           ))}
         </ol>

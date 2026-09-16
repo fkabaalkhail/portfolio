@@ -1,5 +1,18 @@
 // all the site content in one place so its easy to update
 
+export interface StackItem {
+  name: string;
+  icon: string;
+}
+
+export interface StackLayer {
+  id: string;
+  label: string;
+  summary: string;
+  items: StackItem[];
+  work: string[];
+}
+
 export interface Experience {
   company: string;
   role: string;
@@ -34,14 +47,16 @@ export interface Project {
 export const siteConfig = {
   name: "Fahad Aba-Alkhail",
   location: "Ottawa, Canada",
+  role: "Full-Stack Engineer",
   intro:
-    "I'm a Computer Science student passionate about building scalable cloud infrastructure and backend systems. I enjoy turning complex problems into clean, reliable solutions.",
+    "I ship SwiftUI and Next.js front ends, Node and FastAPI services, and the Kubernetes infrastructure they run on. Magna cum laude Computer Science graduate from uOttawa, now a software engineer at Ericsson.",
   email: "fk.abaalkhail@gmail.com",
   github: "https://github.com/fkabaalkhail",
   education: {
     university: "University of Ottawa",
     program: "BSc Computer Science",
     gpa: "3.9/4.0",
+    honors: "Magna Cum Laude",
     graduationDate: "2026",
   },
   experiences: [
@@ -145,12 +160,164 @@ export const siteConfig = {
 };
 
 export const navLinks = [
-  { label: "Apps", href: "#apps" },
-  { label: "Experience", href: "#experience" },
   { label: "About", href: "#about" },
+  { label: "Apps", href: "#apps" },
+  { label: "Stack", href: "#stack" },
+  { label: "Experience", href: "#experience" },
   { label: "How I Work", href: "#workflow" },
   { label: "Case Studies", href: "#case-studies" },
 ] as const;
+
+const icon = (name: string) => `/stack/${name}.svg`;
+
+// one row per layer of the stack, with the real work done at that layer
+export const stackLayers: StackLayer[] = [
+  {
+    id: "client",
+    label: "Client",
+    summary: "Native iOS and web front ends",
+    items: [
+      { name: "Swift", icon: icon("swift") },
+      { name: "React", icon: icon("react") },
+      { name: "Next.js", icon: icon("nextjs") },
+      { name: "TypeScript", icon: icon("typescript") },
+      { name: "Tailwind CSS", icon: icon("tailwindcss") },
+    ],
+    work: [
+      "SwiftUI apps Mrasem and Mawaqeet with full Arabic RTL",
+      "Next.js admin dashboard for Mrasem bookings",
+    ],
+  },
+  {
+    id: "api",
+    label: "API",
+    summary: "REST services, auth and payments",
+    items: [
+      { name: "Node.js", icon: icon("nodejs") },
+      { name: "Express", icon: icon("express") },
+      { name: "FastAPI", icon: icon("fastapi") },
+      { name: "Python", icon: icon("python") },
+      { name: "Stripe", icon: icon("stripe") },
+    ],
+    work: [
+      "JWT auth and rate limiting that cut API latency 20% at Moneymoon",
+      "Dockerised Express backend for Stripe and Apple Pay in Mawaqeet",
+    ],
+  },
+  {
+    id: "data",
+    label: "Data",
+    summary: "Relational, document and object storage",
+    items: [
+      { name: "PostgreSQL", icon: icon("postgresql") },
+      { name: "Supabase", icon: icon("supabase") },
+      { name: "MongoDB", icon: icon("mongodb") },
+      { name: "Redis", icon: icon("redis") },
+    ],
+    work: [
+      "Migrated petabyte-scale workloads from MapR to S3 with zero data loss",
+      "Supabase schema and phone OTP auth behind Mrasem",
+    ],
+  },
+  {
+    id: "infra",
+    label: "Infrastructure",
+    summary: "Containers, clusters and IaC",
+    items: [
+      { name: "Docker", icon: icon("docker") },
+      { name: "Kubernetes", icon: icon("kubernetes") },
+      { name: "Terraform", icon: icon("terraform") },
+      { name: "AWS", icon: icon("aws") },
+      { name: "Google Cloud", icon: icon("googlecloud") },
+    ],
+    work: [
+      "Kubernetes with HPA and ingress for Ericsson's FST Analysis platform",
+      "Production GKE from scratch with multi-cluster Terraform at HAMS.AI",
+    ],
+  },
+  {
+    id: "ops",
+    label: "Observability",
+    summary: "Metrics, dashboards and CI/CD",
+    items: [
+      { name: "Grafana", icon: icon("grafana") },
+      { name: "Prometheus", icon: icon("prometheus") },
+      { name: "VictoriaMetrics", icon: icon("victoriametrics") },
+      { name: "GitHub Actions", icon: icon("githubactions") },
+    ],
+    work: [
+      "VictoriaMetrics stack and 3 Grafana dashboards for pipeline health",
+      "30% lower cloud spend through autoscaling and right-sizing",
+    ],
+  },
+];
+
+// the full logo wall, grouped for the stack section
+export const stackGroups: { label: string; items: StackItem[] }[] = [
+  {
+    label: "Languages",
+    items: [
+      { name: "Swift", icon: icon("swift") },
+      { name: "TypeScript", icon: icon("typescript") },
+      { name: "JavaScript", icon: icon("javascript") },
+      { name: "Python", icon: icon("python") },
+      { name: "Java", icon: icon("java") },
+      { name: "C++", icon: icon("cplusplus") },
+    ],
+  },
+  {
+    label: "Frontend & Mobile",
+    items: [
+      { name: "SwiftUI", icon: icon("swift") },
+      { name: "Xcode", icon: icon("xcode") },
+      { name: "React", icon: icon("react") },
+      { name: "Next.js", icon: icon("nextjs") },
+      { name: "Tailwind CSS", icon: icon("tailwindcss") },
+      { name: "Apple Pay", icon: icon("applepay") },
+    ],
+  },
+  {
+    label: "Backend & Data",
+    items: [
+      { name: "Node.js", icon: icon("nodejs") },
+      { name: "Express", icon: icon("express") },
+      { name: "FastAPI", icon: icon("fastapi") },
+      { name: "PostgreSQL", icon: icon("postgresql") },
+      { name: "MongoDB", icon: icon("mongodb") },
+      { name: "Redis", icon: icon("redis") },
+      { name: "Supabase", icon: icon("supabase") },
+      { name: "Stripe", icon: icon("stripe") },
+    ],
+  },
+  {
+    label: "Cloud & DevOps",
+    items: [
+      { name: "AWS", icon: icon("aws") },
+      { name: "Google Cloud", icon: icon("googlecloud") },
+      { name: "Azure", icon: icon("azure") },
+      { name: "Oracle Cloud", icon: icon("oracle") },
+      { name: "Docker", icon: icon("docker") },
+      { name: "Kubernetes", icon: icon("kubernetes") },
+      { name: "Helm", icon: icon("helm") },
+      { name: "Terraform", icon: icon("terraform") },
+      { name: "Ansible", icon: icon("ansible") },
+      { name: "GitHub Actions", icon: icon("githubactions") },
+      { name: "NGINX", icon: icon("nginx") },
+      { name: "Linux", icon: icon("linux") },
+    ],
+  },
+  {
+    label: "Observability & Quality",
+    items: [
+      { name: "Grafana", icon: icon("grafana") },
+      { name: "Prometheus", icon: icon("prometheus") },
+      { name: "VictoriaMetrics", icon: icon("victoriametrics") },
+      { name: "SonarQube", icon: icon("sonarqube") },
+      { name: "Git", icon: icon("git") },
+      { name: "Vercel", icon: icon("vercel") },
+    ],
+  },
+];
 
 export interface AppFeature {
   title: string;

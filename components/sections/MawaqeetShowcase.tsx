@@ -16,7 +16,7 @@ const features = [
   { icon: Sunrise, title: "Prayer engine", body: "ISNA & Umm Al-Qura calculation methods from solar position." },
   { icon: Compass, title: "Qibla compass", body: "CoreMotion heading with live direction to Makkah." },
   { icon: CalendarDays, title: "Hijri calendar", body: "Maghrib-based date transitions with ±2 day correction." },
-  { icon: CheckCircle2, title: "Prayer tracker", body: "Mark prayers complete and build a daily streak." },
+  { icon: CheckCircle2, title: "Prayer tracker", body: "Mark each prayer complete and review a 7-day trend." },
   { icon: CreditCard, title: "Stripe + Apple Pay", body: "Dockerised Node/Express backend for support payments." },
   { icon: Languages, title: "Arabic / English", body: "Full localisation with right-to-left layouts." },
 ];
@@ -53,7 +53,7 @@ export default function MawaqeetShowcase() {
   const moonY = useTransform(scrollYProgress, [0, 1], [120, -40]);
 
   return (
-    <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-night via-[#0b2438] to-[#0f2c46] text-[#f8f9fa] md:rounded-[3rem]">
+    <div className="relative overflow-hidden rounded-xl bg-gradient-to-b from-night via-[#0b2438] to-[#0f2c46] text-[#f8f9fa]">
       {/* star field */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         {stars.map((s, i) => (
@@ -73,16 +73,16 @@ export default function MawaqeetShowcase() {
 
       <div className="relative px-6 pt-14 md:px-14 md:pt-20">
         <div className="flex flex-wrap items-center gap-3">
-          <span className="font-display text-3xl font-bold tracking-tight">
-            Mawaqeet <span className="font-serif font-normal italic text-peach">مواقيت</span>
+          <span className="font-display text-3xl tracking-[-0.01em]">
+            Mawaqeet <span className="text-peach">مواقيت</span>
           </span>
-          <span className="rounded-full border border-peach/30 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-peach">
+          <span className="rounded-full border border-peach/30 px-3 py-1 text-xs font-medium uppercase tracking-[1.5px] text-peach">
             02 · Live on the App Store
           </span>
         </div>
-        <h3 className="mt-8 max-w-4xl font-display text-[clamp(2.4rem,6vw,5rem)] font-bold leading-[0.95] tracking-[-0.04em]">
+        <h3 className="mt-8 max-w-3xl font-display text-[clamp(2.25rem,4.6vw,3.5rem)] font-normal leading-[1.08] tracking-[-0.02em]">
           <SplitWords text="Every prayer," />{" "}
-          <SplitWords text="right on time." delay={0.15} wordClassName="font-serif font-normal italic text-peach" />
+          <SplitWords text="right on time." delay={0.15} wordClassName="text-peach" />
         </h3>
         <Reveal delay={0.2}>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#a8b8ca]">{project.description}</p>
@@ -122,9 +122,9 @@ export default function MawaqeetShowcase() {
 
         {/* tilted callout chips */}
         {[
-          { label: "🧭 Live Qibla heading", cls: "left-[2%] top-[8%] -rotate-6 bg-peach text-night", delay: 0.1 },
-          { label: "🌙 Maghrib-based Hijri dates", cls: "right-[0%] top-[4%] rotate-3 bg-[#f8e9c0] text-night", delay: 0.25 },
-          { label: "✓ Daily prayer streaks", cls: "bottom-[14%] right-[6%] -rotate-3 bg-white text-night", delay: 0.4 },
+          { icon: Compass, label: "Live Qibla heading", cls: "left-[2%] top-[8%] bg-peach text-night", delay: 0.1 },
+          { icon: CalendarDays, label: "Maghrib-based Hijri dates", cls: "right-[0%] top-[4%] bg-[#f8e9c0] text-night", delay: 0.25 },
+          { icon: CheckCircle2, label: "Daily prayer tracking", cls: "bottom-[14%] right-[6%] bg-canvas text-night", delay: 0.4 },
         ].map((chip) => (
           <motion.span
             key={chip.label}
@@ -132,8 +132,9 @@ export default function MawaqeetShowcase() {
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true, amount: 0.8 }}
             transition={{ type: "spring", stiffness: 260, damping: 16, delay: chip.delay }}
-            className={`absolute z-20 hidden whitespace-nowrap rounded-2xl px-4 py-2.5 text-sm font-semibold shadow-2xl md:block ${chip.cls}`}
+            className={`absolute z-20 hidden items-center gap-2 whitespace-nowrap rounded-lg px-3.5 py-2.5 text-sm font-medium shadow-xl md:flex ${chip.cls}`}
           >
+            <chip.icon className="h-4 w-4" />
             {chip.label}
           </motion.span>
         ))}
@@ -141,7 +142,7 @@ export default function MawaqeetShowcase() {
 
       {/* EN / AR toggle */}
       <div className="relative mt-10 flex justify-center">
-        <div className="flex gap-1 rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-xl">
+        <div className="flex gap-1 rounded-lg border border-white/10 bg-white/5 p-1 backdrop-blur-xl">
           {(["en", "ar"] as const).map((l) => (
             <button
               key={l}
@@ -150,12 +151,12 @@ export default function MawaqeetShowcase() {
                 setLang(l);
               }}
               aria-pressed={lang === l}
-              className={`relative rounded-full px-5 py-2 text-sm font-semibold transition-colors ${lang === l ? "text-night" : "text-white/60 hover:text-white"}`}
+              className={`relative rounded-md px-5 py-2 text-sm font-medium transition-colors ${lang === l ? "text-night" : "text-white/60 hover:text-white"}`}
             >
               {lang === l && (
                 <motion.span
                   layoutId="mawaqeet-lang"
-                  className="absolute inset-0 rounded-full bg-peach"
+                  className="absolute inset-0 rounded-md bg-peach"
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
@@ -175,12 +176,12 @@ export default function MawaqeetShowcase() {
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.7, ease: EASE_OUT, delay: i * 0.06 }}
             whileHover={{ y: -6 }}
-            className="group rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm transition-colors hover:border-peach/40 hover:bg-white/[0.07]"
+            className="group rounded-lg border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm transition-colors hover:border-peach/40 hover:bg-white/[0.07]"
           >
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-peach/15 text-peach transition-transform duration-500 group-hover:rotate-[360deg]">
+            <div className="flex h-11 w-11 items-center justify-center rounded-md bg-peach/15 text-peach">
               <f.icon className="h-5 w-5" />
             </div>
-            <h4 className="mt-5 font-display text-xl font-semibold">{f.title}</h4>
+            <h4 className="mt-5 text-lg font-medium">{f.title}</h4>
             <p className="mt-2 text-sm leading-relaxed text-[#a8b8ca]">{f.body}</p>
           </motion.div>
         ))}
@@ -197,7 +198,7 @@ export default function MawaqeetShowcase() {
         <div className="flex flex-wrap gap-3">
           <button
             onClick={() => setArchOpen(true)}
-            className="inline-flex items-center gap-2 rounded-full border border-peach/40 px-5 py-3 text-sm font-semibold text-peach transition-colors hover:bg-peach/10"
+            className="inline-flex items-center gap-2 rounded-md border border-peach/40 px-5 h-11 text-sm font-medium text-peach transition-colors hover:bg-peach/10"
           >
             <Network className="h-4 w-4" />
             Architecture
@@ -206,7 +207,7 @@ export default function MawaqeetShowcase() {
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 rounded-full bg-peach px-5 py-3 text-sm font-semibold text-night transition-transform hover:scale-[1.03]"
+            className="group inline-flex items-center gap-2 rounded-md bg-peach px-5 h-11 text-sm font-medium text-night transition-colors hover:bg-peach/90"
           >
             View source
             <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

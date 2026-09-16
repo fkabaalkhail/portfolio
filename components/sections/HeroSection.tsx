@@ -1,49 +1,91 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
-import { ArrowDown, ArrowUpRight, MapPin } from "lucide-react";
+import { motion, useMotionValue, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { siteConfig } from "@/lib/constants";
 import IPhone from "@/components/ui/IPhone";
-import { EASE_OUT, Magnetic, Marquee, ScrambleCycle, SplitWords } from "@/components/motion/primitives";
+import { EASE_OUT, SplitWords, TechLogo } from "@/components/motion/primitives";
 
-const roles = ["SOFTWARE ENGINEER", "iOS DEVELOPER", "DEVOPS ENGINEER", "BACKEND ENGINEER"];
-
-const pillColors = [
-  "bg-sun text-ink",
-  "bg-ink text-paper",
-  "bg-sky text-ink",
-  "bg-paper text-ink border border-ink/10",
-  "bg-mint text-ink",
-  "bg-ember text-white",
-  "bg-plum text-ink",
+const dailyStack = [
+  { name: "Swift", icon: "/stack/swift.svg" },
+  { name: "Next.js", icon: "/stack/nextjs.svg" },
+  { name: "Node.js", icon: "/stack/nodejs.svg" },
+  { name: "PostgreSQL", icon: "/stack/postgresql.svg" },
+  { name: "Docker", icon: "/stack/docker.svg" },
+  { name: "Kubernetes", icon: "/stack/kubernetes.svg" },
+  { name: "AWS", icon: "/stack/aws.svg" },
 ];
+
+// illustrative snippet in the shape of the Mrasem booking API
+const codeLines: { indent: number; tokens: [string, string][] }[] = [
+  { indent: 0, tokens: [["text-[#c792ea]", "router"], ["text-on-dark", ".post("], ["text-[#c3e88d]", "\"/bookings\""], ["text-on-dark", ", auth, "], ["text-[#c792ea]", "async"], ["text-on-dark", " (req, res) => {"]] },
+  { indent: 1, tokens: [["text-[#c792ea]", "const"], ["text-on-dark", " { venueId, date, guests } = req.body;"]] },
+  { indent: 1, tokens: [["text-[#c792ea]", "const"], ["text-on-dark", " { data, error } = "], ["text-[#c792ea]", "await"], ["text-on-dark", " supabase"]] },
+  { indent: 2, tokens: [["text-on-dark", ".from("], ["text-[#c3e88d]", "\"bookings\""], ["text-on-dark", ")"]] },
+  { indent: 2, tokens: [["text-on-dark", ".insert({ venueId, date, guests })"]] },
+  { indent: 2, tokens: [["text-on-dark", ".select().single();"]] },
+  { indent: 1, tokens: [["text-[#c792ea]", "if"], ["text-on-dark", " (error) "], ["text-[#c792ea]", "return"], ["text-on-dark", " res.sendStatus("], ["text-amber", "400"], ["text-on-dark", ");"]] },
+  { indent: 1, tokens: [["text-on-dark", "res.status("], ["text-amber", "201"], ["text-on-dark", ").json(data);"]] },
+  { indent: 0, tokens: [["text-on-dark", "});"]] },
+];
+
+const podRows = [
+  ["api-7d9f8c6b5-2xkqp", "1/1", "Running"],
+  ["api-7d9f8c6b5-8mzt4", "1/1", "Running"],
+  ["worker-5c4b9d7f8-q6wrn", "1/1", "Running"],
+];
+
+// layer that floats gently and shifts with the pointer by `depth`
+function Layer({
+  children,
+  className,
+  depth,
+  sx,
+  sy,
+  floatY,
+  duration,
+  delay,
+}: {
+  children: React.ReactNode;
+  className: string;
+  depth: number;
+  sx: MotionValue<number>;
+  sy: MotionValue<number>;
+  floatY: number;
+  duration: number;
+  delay: number;
+}) {
+  const x = useTransform(sx, (v) => v * depth);
+  const y = useTransform(sy, (v) => v * depth);
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, ease: EASE_OUT, delay }}
+      className={className}
+    >
+      <motion.div style={{ x, y }}>
+        <motion.div
+          animate={{ y: [0, floatY, 0] }}
+          transition={{ duration, repeat: Infinity, ease: "easeInOut", delay: delay + 1 }}
+        >
+          {children}
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
+}
 
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const sceneY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
-  // pointer parallax for the floating phones
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
-  const sx = useSpring(mx, { stiffness: 60, damping: 18 });
-  const sy = useSpring(my, { stiffness: 60, damping: 18 });
-
-  const backX = useTransform(sx, (v) => v * -18);
-  const backY = useTransform(sy, (v) => v * -18);
-  const frontX = useTransform(sx, (v) => v * 26);
-  const frontY = useTransform(sy, (v) => v * 26);
-  const rotY = useTransform(sx, (v) => v * 10);
-  const rotX = useTransform(sy, (v) => v * -8);
-
-  // scroll: phones drift apart and the copy lifts away
-  const backScrollY = useTransform(scrollYProgress, [0, 1], [0, -120]);
-  const frontScrollY = useTransform(scrollYProgress, [0, 1], [0, 160]);
-  const copyY = useTransform(scrollYProgress, [0, 1], [0, 140]);
-  const copyOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-
-  const allSkills = siteConfig.skillCategories.flatMap((c) => c.skills);
-  const half = Math.ceil(allSkills.length / 2);
+  const sx = useSpring(mx, { stiffness: 50, damping: 20 });
+  const sy = useSpring(my, { stiffness: 50, damping: 20 });
 
   return (
     <section
@@ -53,191 +95,171 @@ export default function HeroSection() {
         mx.set((e.clientX - r.left) / r.width - 0.5);
         my.set((e.clientY - r.top) / r.height - 0.5);
       }}
-      className="relative isolate overflow-hidden pt-28 md:pt-32"
+      className="relative overflow-hidden"
     >
-      {/* animated colour blobs */}
-      <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden">
-        <motion.div
-          animate={{ x: [0, 60, -30, 0], y: [0, -40, 30, 0], scale: [1, 1.15, 0.95, 1] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -left-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-sun/60 blur-[110px]"
-        />
-        <motion.div
-          animate={{ x: [0, -50, 40, 0], y: [0, 50, -20, 0], scale: [1, 0.9, 1.1, 1] }}
-          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute right-[-10rem] top-10 h-[36rem] w-[36rem] rounded-full bg-ember/40 blur-[120px]"
-        />
-        <motion.div
-          animate={{ x: [0, 40, -40, 0], y: [0, -30, 40, 0] }}
-          transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-0 left-1/3 h-[28rem] w-[28rem] rounded-full bg-plum/40 blur-[120px]"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(23,18,13,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(23,18,13,0.05)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
-      </div>
-
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 md:px-8 lg:min-h-[calc(100vh-8rem)] lg:grid-cols-[1.15fr_0.85fr]">
-        <motion.div style={{ y: copyY, opacity: copyOpacity }}>
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
+      <div className="mx-auto grid max-w-[1200px] items-center gap-14 px-5 pb-20 pt-12 md:px-8 md:pt-16 lg:min-h-[calc(100vh-4rem)] lg:grid-cols-2 lg:gap-10 lg:pb-24">
+        {/* copy */}
+        <div>
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: EASE_OUT, delay: 0.3 }}
-            className="mb-7 flex flex-wrap items-center gap-2"
+            transition={{ duration: 0.6, ease: EASE_OUT }}
+            className="inline-flex items-center gap-2 rounded-full bg-surface-card px-3 py-1 text-[13px] font-medium text-ink"
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-paper/70 px-3 py-1.5 text-sm font-medium backdrop-blur">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
-              </span>
-              {siteConfig.name}
-            </span>
-            <span className="inline-flex min-w-[11.5rem] items-center rounded-full bg-ink px-3 py-1.5 font-mono text-xs tracking-wider text-sun">
-              <ScrambleCycle words={roles} />
-            </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-paper/70 px-3 py-1.5 text-sm text-muted backdrop-blur">
-              <MapPin className="h-3.5 w-3.5" />
-              {siteConfig.location}
-            </span>
-          </motion.div>
+            <span className="h-1.5 w-1.5 rounded-full bg-success" />
+            {siteConfig.role} · {siteConfig.location}
+          </motion.p>
 
-          <h1 className="font-display text-[clamp(2.75rem,7.2vw,6.5rem)] font-bold leading-[0.92] tracking-[-0.045em] text-ink">
-            <SplitWords text="I build cloud systems" delay={0.35} />
-            <br />
-            <SplitWords text="&" delay={0.6} wordClassName="font-serif font-normal italic text-ember" />{" "}
-            <SplitWords
-              text="iOS apps"
-              delay={0.66}
-              wordClassName="font-serif font-normal italic tracking-[-0.02em] text-ember"
-            />
-            <br />
-            <SplitWords text="people love." delay={0.8} />
+          <h1 className="mt-6 font-display text-[clamp(2.5rem,5.6vw,4.25rem)] font-normal leading-[1.04] tracking-[-0.025em] text-ink">
+            <SplitWords text="I build products end to end," delay={0.1} />{" "}
+            <SplitWords text="from the screen to the cluster." delay={0.3} wordClassName="text-muted-soft" />
           </h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: EASE_OUT, delay: 1.05 }}
-            className="mt-7 max-w-xl text-lg leading-relaxed text-muted"
+            transition={{ duration: 0.7, ease: EASE_OUT, delay: 0.55 }}
+            className="mt-6 max-w-xl text-lg leading-relaxed text-body"
           >
             {siteConfig.intro}
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: EASE_OUT, delay: 1.2 }}
-            className="mt-9 flex flex-wrap items-center gap-3"
+            transition={{ duration: 0.7, ease: EASE_OUT, delay: 0.65 }}
+            className="mt-8 flex flex-wrap gap-3"
           >
-            <Magnetic>
-              <a
-                href="#apps"
-                className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-semibold text-paper shadow-[0_12px_30px_-10px_rgba(23,18,13,0.6)]"
-              >
-                See my iOS apps
-                <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
-              </a>
-            </Magnetic>
-            <Magnetic>
-              <a
-                href={siteConfig.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full border border-ink/15 bg-paper/60 px-6 py-3.5 font-semibold text-ink backdrop-blur"
-              >
-                GitHub
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </a>
-            </Magnetic>
-          </motion.div>
-        </motion.div>
-
-        {/* floating device stack */}
-        <div className="relative mx-auto h-[520px] w-full max-w-[460px] [perspective:1400px] sm:h-[600px]">
-          <motion.div
-            initial={{ opacity: 0, y: 120, rotate: -14 }}
-            animate={{ opacity: 1, y: 0, rotate: -9 }}
-            transition={{ duration: 1.3, ease: EASE_OUT, delay: 0.5 }}
-            className="absolute left-0 top-6 w-[52%]"
-          >
-            <motion.div style={{ x: backX, y: backY, rotateX: rotX, rotateY: rotY }}>
-              <motion.div style={{ y: backScrollY }}>
-                <motion.div animate={{ y: [0, -14, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}>
-                  <IPhone src="/apps/mawaqeet/prayer.webp" alt="Mawaqeet prayer times screen" priority />
-                </motion.div>
-              </motion.div>
-            </motion.div>
+            <a
+              href="#about"
+              className="group inline-flex h-11 items-center gap-2 rounded-md bg-coral px-5 text-sm font-medium text-white transition-colors hover:bg-coral-active"
+            >
+              About me
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </a>
+            <a
+              href={siteConfig.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-11 items-center rounded-md border border-hairline bg-canvas px-5 text-sm font-medium text-ink transition-colors hover:border-muted-soft"
+            >
+              GitHub
+            </a>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 160, rotate: 14 }}
-            animate={{ opacity: 1, y: 0, rotate: 7 }}
-            transition={{ duration: 1.3, ease: EASE_OUT, delay: 0.7 }}
-            className="absolute right-0 top-20 w-[56%]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.85 }}
+            className="mt-12 border-t border-hairline pt-6"
           >
-            <motion.div style={{ x: frontX, y: frontY, rotateX: rotX, rotateY: rotY }}>
-              <motion.div style={{ y: frontScrollY }}>
-                <motion.div animate={{ y: [0, 12, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}>
-                  <IPhone src="/apps/mrasem/categories.webp" alt="Mrasem category home screen" priority />
-                </motion.div>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-
-          {/* floating labels */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ type: "spring", stiffness: 200, damping: 14, delay: 1.4 }}
-            className="absolute left-[-4%] bottom-24 z-10 rotate-[-6deg] rounded-2xl bg-night px-4 py-2.5 text-sm font-semibold text-peach shadow-xl"
-          >
-            🌙 Mawaqeet
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ type: "spring", stiffness: 200, damping: 14, delay: 1.55 }}
-            className="absolute right-[-2%] top-8 z-10 rotate-[5deg] rounded-2xl bg-espresso px-4 py-2.5 text-sm font-semibold text-gold shadow-xl"
-          >
-            ✦ Mrasem
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: EASE_OUT, delay: 1.7 }}
-            className="absolute bottom-2 right-6 z-10 rounded-full border border-ink/10 bg-paper/80 px-4 py-2 font-mono text-xs text-ink backdrop-blur"
-          >
-            SwiftUI · shipped to real users
+            <p className="text-xs font-medium uppercase tracking-[1.5px] text-muted-soft">Daily stack</p>
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              {dailyStack.map((t) => (
+                <span
+                  key={t.name}
+                  title={t.name}
+                  className="flex h-11 w-11 items-center justify-center rounded-lg border border-hairline bg-canvas"
+                >
+                  <TechLogo name={t.name} icon={t.icon} size={24} />
+                </span>
+              ))}
+            </div>
           </motion.div>
         </div>
-      </div>
 
-      {/* skills ticker */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 1 }}
-        className="mt-10 space-y-3 pb-16 md:mt-4"
-      >
-        <Marquee>
-          {allSkills.slice(0, half).map((skill, i) => (
-            <span
-              key={skill}
-              className={`whitespace-nowrap rounded-full px-5 py-2.5 font-display text-lg font-semibold ${pillColors[i % pillColors.length]}`}
-            >
-              {skill}
-            </span>
-          ))}
-        </Marquee>
-        <Marquee reverse>
-          {allSkills.slice(half).map((skill, i) => (
-            <span
-              key={skill}
-              className={`whitespace-nowrap rounded-full px-5 py-2.5 font-display text-lg font-semibold ${pillColors[(i + 3) % pillColors.length]}`}
-            >
-              {skill}
-            </span>
-          ))}
-        </Marquee>
-      </motion.div>
+        {/* layered full-stack scene */}
+        <motion.div style={{ y: sceneY }} className="relative mx-auto aspect-[1/1.08] w-full max-w-[560px]">
+          {/* API code window */}
+          <Layer className="absolute left-0 top-[5%] z-10 w-[68%]" depth={-10} sx={sx} sy={sy} floatY={-6} duration={7} delay={0.3}>
+            <div className="overflow-hidden rounded-lg bg-dark shadow-[0_30px_60px_-30px_rgba(20,20,19,0.55)]">
+              <div className="flex items-center gap-2 border-b border-white/5 px-4 py-2.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
+                <span className="ml-3 rounded-md bg-dark-elevated px-2.5 py-1 font-mono text-[11px] text-on-dark">
+                  routes/bookings.ts
+                </span>
+              </div>
+              <div className="bg-dark-soft px-4 py-4 font-mono text-[9px] leading-[1.8] sm:text-[11px]">
+                {codeLines.map((line, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -6 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.35, delay: 0.9 + i * 0.12 }}
+                    className="flex whitespace-pre"
+                  >
+                    <span className="mr-3 w-3 select-none text-right text-muted">{i + 1}</span>
+                    <span style={{ paddingLeft: `${line.indent * 1.25}em` }}>
+                      {line.tokens.map(([cls, txt], j) => (
+                        <span key={j} className={cls}>
+                          {txt}
+                        </span>
+                      ))}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+              <div className="flex items-center justify-between bg-dark-elevated px-4 py-1.5 font-mono text-[10px] text-on-dark-soft">
+                <span className="flex items-center gap-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-teal" /> POST /bookings
+                </span>
+                <span>201 Created · 42ms</span>
+              </div>
+            </div>
+          </Layer>
+
+          {/* Mawaqeet phone (back) */}
+          <Layer className="absolute right-0 top-0 z-0 w-[31%]" depth={14} sx={sx} sy={sy} floatY={10} duration={8} delay={0.45}>
+            <div className="rotate-[5deg]">
+              <IPhone src="/apps/mawaqeet/prayer.webp" alt="Mawaqeet prayer times in Night Mode" priority sizes="200px" />
+            </div>
+          </Layer>
+
+          {/* Mrasem phone (front) */}
+          <Layer className="absolute right-[9%] top-[31%] z-20 w-[34%]" depth={26} sx={sx} sy={sy} floatY={-12} duration={6.5} delay={0.6}>
+            <div className="-rotate-[3deg]">
+              <IPhone src="/apps/mrasem/categories.webp" alt="Mrasem category home screen" priority sizes="220px" />
+            </div>
+          </Layer>
+
+          {/* deploy terminal */}
+          <Layer className="absolute bottom-[4%] left-[3%] z-30 w-[52%]" depth={36} sx={sx} sy={sy} floatY={8} duration={7.5} delay={0.75}>
+            <div className="overflow-hidden rounded-lg border border-white/10 bg-dark/95 shadow-[0_30px_60px_-24px_rgba(20,20,19,0.6)] backdrop-blur">
+              <div className="border-b border-white/5 px-3.5 py-2 font-mono text-[10px] text-on-dark-soft">zsh — prod</div>
+              <div className="px-3.5 py-3 font-mono text-[10px] leading-[1.8] text-on-dark sm:text-[11px]">
+                <p>
+                  <span className="text-coral">$</span> kubectl get pods -n api
+                </p>
+                <p className="text-muted-soft">NAME{"                    "}READY STATUS</p>
+                {podRows.map(([name, ready, status], i) => (
+                  <motion.p
+                    key={name}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 2.1 + i * 0.25 }}
+                    className="whitespace-pre"
+                  >
+                    {name.padEnd(24, " ")}
+                    {ready}
+                    {"   "}
+                    <span className="text-success">{status}</span>
+                  </motion.p>
+                ))}
+                <p className="mt-1 flex items-center">
+                  <span className="text-coral">$</span>
+                  <motion.span
+                    animate={{ opacity: [1, 0, 1] }}
+                    transition={{ duration: 1, repeat: Infinity }}
+                    className="ml-1.5 inline-block h-3 w-1.5 bg-on-dark"
+                  />
+                </p>
+              </div>
+            </div>
+          </Layer>
+        </motion.div>
+      </div>
     </section>
   );
 }
