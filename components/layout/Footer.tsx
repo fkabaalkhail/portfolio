@@ -23,7 +23,7 @@ export default function Footer() {
       <div className="mx-auto grid max-w-[1200px] gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
         <div>
           <p className="font-display text-4xl leading-none tracking-[-0.02em] text-on-dark">
-            fahad<span className="text-coral">.</span>
+            fahad<span className="text-accent-soft">.</span>
           </p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed">
             {siteConfig.role} in {siteConfig.location}. SwiftUI to Kubernetes.

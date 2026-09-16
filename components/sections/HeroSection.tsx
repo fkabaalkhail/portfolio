@@ -11,6 +11,7 @@ const dailyStack = [
   { name: "Swift", icon: "/stack/swift.svg" },
   { name: "Next.js", icon: "/stack/nextjs.svg" },
   { name: "Node.js", icon: "/stack/nodejs.svg" },
+  { name: "Python", icon: "/stack/python.svg" },
   { name: "PostgreSQL", icon: "/stack/postgresql.svg" },
   { name: "Docker", icon: "/stack/docker.svg" },
   { name: "Kubernetes", icon: "/stack/kubernetes.svg" },
@@ -100,15 +101,21 @@ export default function HeroSection() {
       <div className="mx-auto grid max-w-[1200px] items-center gap-14 px-5 pb-20 pt-12 md:px-8 md:pt-16 lg:min-h-[calc(100vh-4rem)] lg:grid-cols-2 lg:gap-10 lg:pb-24">
         {/* copy */}
         <div>
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: EASE_OUT }}
-            className="inline-flex items-center gap-2 rounded-full bg-surface-card px-3 py-1 text-[13px] font-medium text-ink"
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, ease: EASE_OUT }}
+            className="flex items-center gap-4 text-sm"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-success" />
-            {siteConfig.role} · {siteConfig.location}
-          </motion.p>
+            <motion.span
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.9, ease: EASE_OUT, delay: 0.1 }}
+              className="h-px w-10 origin-left bg-ink"
+            />
+            <span className="font-medium text-ink">{siteConfig.role}</span>
+            <span className="font-mono text-xs text-muted-soft">45.42° N, 75.70° W</span>
+          </motion.div>
 
           <h1 className="mt-6 font-display text-[clamp(2.5rem,5.6vw,4.25rem)] font-normal leading-[1.04] tracking-[-0.025em] text-ink">
             <SplitWords text="I build products end to end," delay={0.1} />{" "}
@@ -132,7 +139,7 @@ export default function HeroSection() {
           >
             <a
               href="#about"
-              className="group inline-flex h-11 items-center gap-2 rounded-md bg-coral px-5 text-sm font-medium text-white transition-colors hover:bg-coral-active"
+              className="group inline-flex h-11 items-center gap-2 rounded-md bg-accent px-5 text-sm font-medium text-white transition-colors hover:bg-accent-active"
             >
               About me
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -230,7 +237,7 @@ export default function HeroSection() {
               <div className="border-b border-white/5 px-3.5 py-2 font-mono text-[10px] text-on-dark-soft">zsh — prod</div>
               <div className="px-3.5 py-3 font-mono text-[10px] leading-[1.8] text-on-dark sm:text-[11px]">
                 <p>
-                  <span className="text-coral">$</span> kubectl get pods -n api
+                  <span className="text-accent-soft">$</span> kubectl get pods -n api
                 </p>
                 <p className="text-muted-soft">NAME{"                    "}READY STATUS</p>
                 {podRows.map(([name, ready, status], i) => (
@@ -248,7 +255,7 @@ export default function HeroSection() {
                   </motion.p>
                 ))}
                 <p className="mt-1 flex items-center">
-                  <span className="text-coral">$</span>
+                  <span className="text-accent-soft">$</span>
                   <motion.span
                     animate={{ opacity: [1, 0, 1] }}
                     transition={{ duration: 1, repeat: Infinity }}

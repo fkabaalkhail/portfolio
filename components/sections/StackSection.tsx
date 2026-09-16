@@ -44,15 +44,15 @@ export default function StackSection() {
         <Reveal delay={0.1} className="mt-12 overflow-hidden rounded-xl bg-dark text-on-dark">
           <div className="relative px-5 pb-6 pt-8 md:px-10 md:pt-10">
             <div className="relative grid grid-cols-5 gap-2">
-              {/* connector track + coral fill */}
+              {/* connector track + accent fill */}
               <div className="absolute left-[10%] right-[10%] top-6 h-px bg-white/10 md:top-7" />
               <motion.div
-                className="absolute left-[10%] top-6 h-px origin-left bg-coral md:top-7"
+                className="absolute left-[10%] top-6 h-px origin-left bg-accent md:top-7"
                 animate={{ width: `${progress * 80}%` }}
                 transition={{ duration: 0.8, ease: EASE_OUT }}
               />
               <motion.span
-                className="absolute top-6 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-coral shadow-[0_0_0_4px_rgba(204,120,92,0.25)] md:top-7"
+                className="absolute top-6 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent shadow-[0_0_0_4px_rgba(143,156,255,0.3)] md:top-7"
                 animate={{ left: `${10 + progress * 80}%` }}
                 transition={{ duration: 0.8, ease: EASE_OUT }}
               />
@@ -75,9 +75,9 @@ export default function StackSection() {
                       className={cn(
                         "relative z-10 flex h-12 w-12 items-center justify-center rounded-lg border transition-colors duration-500 md:h-14 md:w-14",
                         isActive
-                          ? "border-coral bg-coral text-white"
+                          ? "border-accent bg-accent text-white"
                           : isPast
-                            ? "border-coral/40 bg-dark-elevated text-coral"
+                            ? "border-accent-soft/40 bg-dark-elevated text-accent-soft"
                             : "border-white/10 bg-dark-elevated text-on-dark-soft group-hover:text-on-dark"
                       )}
                     >
@@ -110,7 +110,7 @@ export default function StackSection() {
                 className="grid gap-8 md:grid-cols-[1fr_1.2fr] md:items-center"
               >
                 <div>
-                  <p className="font-mono text-xs text-coral">
+                  <p className="font-mono text-xs text-accent-soft">
                     0{active + 1} / {layer.label.toLowerCase()}
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
@@ -131,7 +131,7 @@ export default function StackSection() {
                 <ul className="space-y-3">
                   {layer.work.map((w) => (
                     <li key={w} className="flex gap-3 text-on-dark">
-                      <span className="mt-2.5 h-1 w-3 shrink-0 rounded-full bg-coral" />
+                      <span className="mt-2.5 h-1 w-3 shrink-0 rounded-full bg-accent-soft" />
                       <span className="leading-relaxed">{w}</span>
                     </li>
                   ))}

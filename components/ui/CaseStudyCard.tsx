@@ -37,7 +37,7 @@ export default function CaseStudyCard({ title, imageSrc, imageAlt, href, index, 
             ))}
           </div>
         </div>
-        <span className="mt-1 inline-flex shrink-0 items-center gap-1 text-sm font-medium text-coral">
+        <span className="mt-1 inline-flex shrink-0 items-center gap-1 text-sm font-medium text-accent">
           {isExternal ? "Live site" : "Case study"}
           <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </span>
@@ -46,7 +46,7 @@ export default function CaseStudyCard({ title, imageSrc, imageAlt, href, index, 
   );
 
   const className =
-    "group block rounded-lg border border-hairline bg-canvas p-3 transition-colors hover:border-muted-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-coral";
+    "group block rounded-lg border border-hairline bg-canvas p-3 transition-colors hover:border-muted-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent";
 
   if (isExternal) {
     return (

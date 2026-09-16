@@ -8,8 +8,9 @@
   --font-display: var(--font-serif-display), "Tiempos Headline", Georgia, serif;
   --font-mono: var(--font-code), ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --color-coral: #cc785c;
-  --color-coral-active: #a9583e;
+  --color-accent: #2f45d6;
+  --color-accent-active: #2436b0;
+  --color-accent-soft: #8f9cff;
   --color-ink: #141413;
   --color-body: #3d3d3a;
   --color-body-strong: #252523;
@@ -70,7 +71,7 @@ body {
 }
 
 ::selection {
-  background: var(--color-coral);
+  background: var(--color-accent);
   color: white;
 }
 

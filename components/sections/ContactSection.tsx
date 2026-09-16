@@ -21,7 +21,7 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="scroll-mt-16 px-5 pb-24 pt-8 md:px-8">
-      <Reveal className="mx-auto max-w-[1200px] rounded-lg bg-coral px-8 py-14 text-white md:px-16 md:py-16">
+      <Reveal className="mx-auto max-w-[1200px] rounded-lg bg-accent px-8 py-14 text-white md:px-16 md:py-16">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr] md:items-end">
           <div>
             <p className="text-xs font-medium uppercase tracking-[1.5px] text-white/80">Get in touch</p>

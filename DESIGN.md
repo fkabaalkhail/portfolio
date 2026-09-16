@@ -19,12 +19,13 @@ Motion is quiet: content fades up once, product mockups animate, and decoration 
 | `ink` | #141413 | Headlines |
 | `body` / `body-strong` | #3d3d3a / #252523 | Running text / lead text |
 | `muted` / `muted-soft` | #6c6a64 / #8e8b82 | Secondary text / captions |
-| `coral` / `coral-active` | #cc785c / #a9583e | Primary CTA, inline links, full-bleed callout |
+| `accent` / `accent-active` | #2f45d6 / #2436b0 | Cobalt. Primary CTA, inline links, full-bleed callout |
+| `accent-soft` | #8f9cff | Cobalt for text, marks and small details on dark surfaces |
 | `dark` / `dark-elevated` / `dark-soft` | #181715 / #252320 / #1f1e1b | Code windows, architecture, footer |
 | `on-dark` / `on-dark-soft` | #faf9f5 / #a09d96 | Text on dark |
 | `teal`, `amber`, `success` | #5db8a6, #e8a55a, #5db872 | Status dots and syntax only |
 
-App showcases are the one sanctioned exception: Mrasem uses `espresso`/`gold` and Mawaqeet uses `night`/`peach`,
+App showcases are the one sanctioned exception: Mrasem uses `espresso`/`gold`, Lapel uses its own stone `#eeece5` / sheet `#23211b` / rust `#b4402c`, and Mawaqeet uses `night`/`peach`,
 matched to each app's own UI.
 
 ## 3. Typography
@@ -35,7 +36,7 @@ matched to each app's own UI.
 - Emphasis inside a headline uses a `muted` second clause, not a new color.
 
 ## 4. Components
-- **Buttons**: 40px tall, `rounded-md` (8px), 14px/500. Primary is `coral` on white; secondary is `canvas` with a hairline border.
+- **Buttons**: 40px tall, `rounded-md` (8px), 14px/500. Primary is `accent` (cobalt) with white text; secondary is `canvas` with a hairline border.
 - **Cards**: `rounded-lg` (12px), 32px padding. Feature cards use `surface-card`; tiles use `canvas` with a hairline border.
 - **Code window**: `dark` with a `dark-soft` body, JetBrains Mono, a tab row and a status bar.
 - **Badges**: pill, 13px/500, on `surface-card`.
@@ -51,6 +52,6 @@ Depth comes from blocks of color, not shadows. Only device mockups get a real sh
 
 ## 7. Don'ts
 - No gradient blobs, grain, rainbow bento tiles, emoji labels or rotated sticker chips.
-- No bold serif, no pure white canvas and no cool blue accent.
-- Coral stays scarce: CTAs, links and the single callout band.
+- No bold serif, no pure white canvas and no second accent colour.
+- The cobalt accent stays scarce: CTAs, links and the single callout band.
 - No hover effects beyond a color or border shift; no tilt or magnetic effects.

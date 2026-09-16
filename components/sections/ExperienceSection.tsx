@@ -28,7 +28,7 @@ export default function ExperienceSection() {
           <span className="absolute bottom-6 left-[7px] top-6 w-px bg-hairline md:left-[11px]" />
           <motion.span
             style={{ scaleY: lineScale }}
-            className="absolute bottom-6 left-[7px] top-6 w-px origin-top bg-coral md:left-[11px]"
+            className="absolute bottom-6 left-[7px] top-6 w-px origin-top bg-accent md:left-[11px]"
           />
 
           {siteConfig.experiences.map((exp, i) => (
@@ -40,8 +40,8 @@ export default function ExperienceSection() {
               transition={{ duration: 0.7, ease: EASE_OUT, delay: i * 0.05 }}
               className="relative"
             >
-              <span className="absolute -left-8 top-9 flex h-[15px] w-[15px] items-center justify-center rounded-full border border-coral bg-canvas md:-left-10 md:h-[23px] md:w-[23px]">
-                <span className="h-[5px] w-[5px] rounded-full bg-coral md:h-[7px] md:w-[7px]" />
+              <span className="absolute -left-8 top-9 flex h-[15px] w-[15px] items-center justify-center rounded-full border border-accent bg-canvas md:-left-10 md:h-[23px] md:w-[23px]">
+                <span className="h-[5px] w-[5px] rounded-full bg-accent md:h-[7px] md:w-[7px]" />
               </span>
               <div className="rounded-lg border border-hairline bg-canvas p-6 md:p-8">
                 <div className="flex flex-wrap items-start justify-between gap-4">
@@ -61,7 +61,7 @@ export default function ExperienceSection() {
                 <ul className="mt-6 space-y-3 border-t border-hairline-soft pt-5">
                   {exp.achievements.map((a) => (
                     <li key={a} className="flex gap-3 leading-relaxed text-body">
-                      <span className="mt-[11px] h-px w-3 shrink-0 bg-coral" />
+                      <span className="mt-[11px] h-px w-3 shrink-0 bg-accent" />
                       <span>{a}</span>
                     </li>
                   ))}

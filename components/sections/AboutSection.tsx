@@ -33,7 +33,7 @@ export default function AboutSection() {
             </p>
             <p>
               Today I work on Kubernetes and data platforms at Ericsson. Alongside that I design and build iOS products
-              like Mrasem and Mawaqeet, owning everything from the SwiftUI screens to the APIs, databases and
+              like Mrasem, Lapel and Mawaqeet, owning everything from the SwiftUI screens to the APIs, databases and
               deployments behind them.
             </p>
           </Reveal>
@@ -45,7 +45,7 @@ export default function AboutSection() {
                 const Icon = interestIcons[i % interestIcons.length];
                 return (
                   <li key={interest} className="flex items-center gap-3 rounded-lg border border-hairline bg-canvas px-4 py-3">
-                    <Icon className="h-4 w-4 shrink-0 text-coral" />
+                    <Icon className="h-4 w-4 shrink-0 text-accent" />
                     <span className="text-sm text-body">{interest}</span>
                   </li>
                 );
@@ -73,7 +73,7 @@ export default function AboutSection() {
                   <p className="text-sm text-muted">{education.program}</p>
                 </div>
               </div>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-coral px-3 py-1 text-xs font-medium uppercase tracking-[1.5px] text-white">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-xs font-medium uppercase tracking-[1.5px] text-white">
                 <Award className="h-3.5 w-3.5" />
                 {education.honors}
               </span>

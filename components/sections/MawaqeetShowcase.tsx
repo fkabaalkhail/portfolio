@@ -77,7 +77,7 @@ export default function MawaqeetShowcase() {
             Mawaqeet <span className="text-peach">مواقيت</span>
           </span>
           <span className="rounded-full border border-peach/30 px-3 py-1 text-xs font-medium uppercase tracking-[1.5px] text-peach">
-            02 · Live on the App Store
+            03 · Live on the App Store
           </span>
         </div>
         <h3 className="mt-8 max-w-3xl font-display text-[clamp(2.25rem,4.6vw,3.5rem)] font-normal leading-[1.08] tracking-[-0.02em]">

@@ -8,7 +8,7 @@ export default function CaseStudyHoldPage({ title }: { title: string }) {
       <p className="mb-8 text-lg text-muted">Coming Soon</p>
       <Link
         href="/#case-studies"
-        className="inline-flex items-center gap-2 h-11 rounded-md bg-coral px-5 text-sm font-medium text-white transition-colors hover:bg-coral-active"
+        className="inline-flex items-center gap-2 h-11 rounded-md bg-accent px-5 text-sm font-medium text-white transition-colors hover:bg-accent-active"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to Portfolio

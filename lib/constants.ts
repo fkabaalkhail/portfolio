@@ -184,7 +184,8 @@ export const stackLayers: StackLayer[] = [
       { name: "Tailwind CSS", icon: icon("tailwindcss") },
     ],
     work: [
-      "SwiftUI apps Mrasem and Mawaqeet with full Arabic RTL",
+      "SwiftUI apps Mrasem, Lapel and Mawaqeet, including full Arabic RTL",
+      "SwiftData, a WidgetKit widget and a share extension in Lapel",
       "Next.js admin dashboard for Mrasem bookings",
     ],
   },
@@ -202,6 +203,7 @@ export const stackLayers: StackLayer[] = [
     work: [
       "JWT auth and rate limiting that cut API latency 20% at Moneymoon",
       "Dockerised Express backend for Stripe and Apple Pay in Mawaqeet",
+      "Authenticated Deno edge functions fronting Lapel's AI try-on pipeline",
     ],
   },
   {
@@ -216,7 +218,7 @@ export const stackLayers: StackLayer[] = [
     ],
     work: [
       "Migrated petabyte-scale workloads from MapR to S3 with zero data loss",
-      "Supabase schema and phone OTP auth behind Mrasem",
+      "Supabase Postgres with row-level security on every table for Lapel and Mrasem",
     ],
   },
   {

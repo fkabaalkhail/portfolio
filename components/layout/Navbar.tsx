@@ -67,7 +67,7 @@ export default function Navbar() {
       >
         <nav className="mx-auto flex h-16 max-w-[1200px] items-center justify-between gap-6 px-5 md:px-8">
           <Link href="/" aria-label={`${siteConfig.name} — home`} className="font-display text-[28px] leading-none tracking-[-0.02em] text-ink">
-            fahad<span className="text-coral">.</span>
+            fahad<span className="text-accent">.</span>
           </Link>
 
           <div className="hidden items-center gap-1 lg:flex">
@@ -97,7 +97,7 @@ export default function Navbar() {
 
           <a
             href={`mailto:${siteConfig.email}`}
-            className="hidden h-10 items-center rounded-md bg-coral px-5 text-sm font-medium text-white transition-colors hover:bg-coral-active lg:inline-flex"
+            className="hidden h-10 items-center rounded-md bg-accent px-5 text-sm font-medium text-white transition-colors hover:bg-accent-active lg:inline-flex"
           >
             Get in touch
           </a>
@@ -111,7 +111,7 @@ export default function Navbar() {
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </nav>
-        <motion.div style={{ scaleX: progress }} className="absolute inset-x-0 bottom-[-1px] h-px origin-left bg-coral" />
+        <motion.div style={{ scaleX: progress }} className="absolute inset-x-0 bottom-[-1px] h-px origin-left bg-accent" />
       </header>
 
       <AnimatePresence>
@@ -134,7 +134,7 @@ export default function Navbar() {
             ))}
             <a
               href={`mailto:${siteConfig.email}`}
-              className="mt-8 inline-flex h-12 items-center justify-center rounded-md bg-coral text-base font-medium text-white"
+              className="mt-8 inline-flex h-12 items-center justify-center rounded-md bg-accent text-base font-medium text-white"
             >
               Get in touch
             </a>

@@ -82,7 +82,7 @@ export default function WorkflowSection() {
             {principles.map((p, i) => (
               <Reveal key={p.title} delay={0.08 * i} className="rounded-lg bg-surface-card p-7">
                 <div className="flex items-start gap-4">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-canvas text-coral">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-canvas text-accent">
                     <p.icon className="h-5 w-5" />
                   </span>
                   <div>

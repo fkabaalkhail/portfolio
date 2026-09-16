@@ -2,6 +2,7 @@
 
 import { Eyebrow, Reveal, SectionHeading } from "@/components/motion/primitives";
 import MrasemShowcase from "@/components/sections/MrasemShowcase";
+import LapelShowcase from "@/components/sections/LapelShowcase";
 import MawaqeetShowcase from "@/components/sections/MawaqeetShowcase";
 
 export default function AppsSection() {
@@ -15,7 +16,7 @@ export default function AppsSection() {
           </div>
           <Reveal delay={0.1}>
             <p className="text-lg leading-relaxed text-body lg:pb-2">
-              Two iOS products I designed and built end to end — native SwiftUI clients, their APIs and data, and the
+              Three iOS products I designed and built end to end — native SwiftUI clients, their APIs and data, and the
               admin tooling around them.
             </p>
           </Reveal>
@@ -23,6 +24,7 @@ export default function AppsSection() {
 
         <div className="space-y-4 md:space-y-6">
           <MrasemShowcase />
+          <LapelShowcase />
           <MawaqeetShowcase />
         </div>
       </div>
