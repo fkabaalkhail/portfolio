@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Accessibility, Check, Eye, MonitorSmartphone } from "lucide-react";
+import { Activity, Check, Gauge, Workflow } from "lucide-react";
 import { EASE_OUT, Eyebrow, Reveal, SectionHeading } from "@/components/motion/primitives";
 
 const pipeline = [
@@ -14,19 +14,19 @@ const pipeline = [
 
 const principles = [
   {
-    icon: Eye,
-    title: "Visual communication",
-    body: "Colour, typography and spacing guide people through the content and carry meaning without relying on text alone.",
+    icon: Workflow,
+    title: "Automate the repeatable",
+    body: "Infrastructure lives in Terraform and ships through CI/CD — Terraform modules cut provisioning time by 60% at Moneymoon.",
   },
   {
-    icon: Accessibility,
-    title: "Accessibility",
-    body: "Interfaces that work for everyone: proper contrast, keyboard navigation, semantic HTML and screen reader support.",
+    icon: Activity,
+    title: "Observable before it's live",
+    body: "Dashboards and alerts go in with the service, not after the first incident — like the VictoriaMetrics and Grafana stack at HAMS.AI.",
   },
   {
-    icon: MonitorSmartphone,
-    title: "Responsive by default",
-    body: "Layouts that hold up on every screen, from an iPhone SE to an ultrawide monitor.",
+    icon: Gauge,
+    title: "Measure, then optimise",
+    body: "Changes are backed by numbers: 35% lower data access latency, 20% faster APIs, 30% less cloud spend.",
   },
 ];
 

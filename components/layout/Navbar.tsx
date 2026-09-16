@@ -3,28 +3,19 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navLinks, siteConfig } from "@/lib/constants";
-import { RollingLabel, rollingParent } from "@/components/motion/primitives";
 import { cn } from "@/lib/utils";
 
 export default function Navbar() {
   const [active, setActive] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const { scrollYProgress } = useScroll();
-  const { scrollY } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 24, mass: 0.3 });
-
-  // hide while scrolling down, reveal on the way up (motion.dev "scroll hide header")
-  useMotionValueEvent(scrollY, "change", (current) => {
-    const previous = scrollY.getPrevious() ?? 0;
-    setHidden(current > previous && current > 160);
-  });
 
   const isServiceSite = pathname.startsWith("/case-studies/service-site");
   const isHome = pathname === "/";
@@ -68,9 +59,7 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.header
-        animate={{ y: hidden && !menuOpen ? "-100%" : "0%" }}
-        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      <header
         className={cn(
           "sticky top-0 z-50 border-b bg-canvas/90 backdrop-blur-md transition-colors duration-300",
           scrolled || menuOpen ? "border-hairline" : "border-transparent"
@@ -106,13 +95,12 @@ export default function Navbar() {
             })}
           </div>
 
-          <motion.a
+          <a
             href={`mailto:${siteConfig.email}`}
-            {...rollingParent}
             className="hidden h-10 items-center rounded-md bg-accent px-5 text-sm font-medium text-white transition-colors hover:bg-accent-active lg:inline-flex"
           >
-            <RollingLabel>Get in touch</RollingLabel>
-          </motion.a>
+            Get in touch
+          </a>
 
           <button
             className="flex h-11 w-11 items-center justify-center rounded-md border border-hairline text-ink lg:hidden"
@@ -124,7 +112,7 @@ export default function Navbar() {
           </button>
         </nav>
         <motion.div style={{ scaleX: progress }} className="absolute inset-x-0 bottom-[-1px] h-px origin-left bg-accent" />
-      </motion.header>
+      </header>
 
       <AnimatePresence>
         {menuOpen && (

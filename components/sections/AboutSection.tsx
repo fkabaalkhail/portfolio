@@ -3,15 +3,15 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Award } from "lucide-react";
-import { ChessArt, FootballArt, HikingArt, PhotographyArt } from "@/components/ui/InterestArt";
+import { IconBallFootball, IconCamera, IconChessKnight, IconTrekking } from "@tabler/icons-react";
 import { siteConfig } from "@/lib/constants";
 import { CountUp, EASE_OUT, Eyebrow, Reveal, SectionHeading } from "@/components/motion/primitives";
 
-const interestCards = [
-  { Art: HikingArt, title: "Hiking", body: "Exploring nature trails" },
-  { Art: PhotographyArt, title: "Photography", body: "Visual storytelling" },
-  { Art: ChessArt, title: "Chess", body: "Playing competitively" },
-  { Art: FootballArt, title: "Football", body: "On the pitch every week" },
+const interests = [
+  { Icon: IconTrekking, label: "Hiking" },
+  { Icon: IconCamera, label: "Photography" },
+  { Icon: IconChessKnight, label: "Competitive chess" },
+  { Icon: IconBallFootball, label: "Football" },
 ];
 
 const impact = [
@@ -53,19 +53,16 @@ export default function AboutSection() {
 
           <Reveal delay={0.15} className="mt-10">
             <p className="text-xs font-medium uppercase tracking-[1.5px] text-muted-soft">Away from the keyboard</p>
-            <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-              {interestCards.map(({ Art, title, body }) => (
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {interests.map(({ Icon, label }) => (
                 <li
-                  key={title}
-                  className="group flex items-center gap-4 rounded-lg border border-hairline bg-canvas p-4 transition-colors hover:border-muted-soft"
+                  key={label}
+                  className="inline-flex items-center gap-2 rounded-full border border-hairline bg-canvas py-1.5 pl-2 pr-3.5 text-sm text-body"
                 >
-                  <span className="h-14 w-14 shrink-0 text-accent">
-                    <Art />
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-surface-card text-ink">
+                    <Icon size={16} stroke={1.75} />
                   </span>
-                  <span>
-                    <span className="block font-medium text-ink">{title}</span>
-                    <span className="block text-sm leading-snug text-muted">{body}</span>
-                  </span>
+                  {label}
                 </li>
               ))}
             </ul>

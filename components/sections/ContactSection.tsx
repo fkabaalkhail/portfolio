@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Check, Copy } from "lucide-react";
 import { siteConfig } from "@/lib/constants";
-import { Reveal, RollingLabel, SplitWords, rollingParent } from "@/components/motion/primitives";
+import { Reveal, SplitWords } from "@/components/motion/primitives";
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
@@ -33,14 +33,13 @@ export default function ContactSection() {
             </p>
           </div>
           <div className="flex flex-col gap-3 md:items-end">
-            <motion.a
+            <a
               href={`mailto:${siteConfig.email}`}
-              {...rollingParent}
               className="group inline-flex h-12 items-center justify-center gap-2 rounded-md bg-canvas px-6 text-sm font-medium text-ink transition-colors hover:bg-surface-soft"
             >
-              <RollingLabel>Email me</RollingLabel>
+              Email me
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </motion.a>
+            </a>
             <button
               onClick={copyEmail}
               aria-live="polite"

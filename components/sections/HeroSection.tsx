@@ -5,7 +5,7 @@ import { motion, useMotionValue, useScroll, useSpring, useTransform, type Motion
 import { ArrowRight } from "lucide-react";
 import { siteConfig } from "@/lib/constants";
 import IPhone from "@/components/ui/IPhone";
-import { EASE_OUT, RollingLabel, SplitWords, TechLogo, rollingParent } from "@/components/motion/primitives";
+import { EASE_OUT, SplitWords, TechLogo } from "@/components/motion/primitives";
 
 const dailyStack = [
   { name: "Swift", icon: "/stack/swift.svg" },
@@ -147,14 +147,13 @@ export default function HeroSection() {
             transition={{ duration: 0.7, ease: EASE_OUT, delay: 0.65 }}
             className="mt-8 flex flex-wrap gap-3"
           >
-            <motion.a
+            <a
               href="#experience"
-              {...rollingParent}
               className="group inline-flex h-11 items-center gap-2 rounded-md bg-accent px-5 text-sm font-medium text-white transition-colors hover:bg-accent-active"
             >
-              <RollingLabel>See my experience</RollingLabel>
+              See my experience
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </motion.a>
+            </a>
             <a
               href={siteConfig.github}
               target="_blank"
